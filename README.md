@@ -4,15 +4,15 @@
 
 ## 目录
 
-- `personal/skills/`：25 个个人 skills。
-- `projects/mc-patcher/skills/`：18 个项目 skills。
+- `personal/skills/`：13 个个人 skills。
+- `projects/mc-patcher/skills/`：9 个项目 skills。
 - `projects/pigora-eq/skills/`：7 个项目 skills。
 - `projects/cl-utilities/skills/`：5 个项目 skills。
 - `projects/varimu-compressor-lab/skills/`：7 个项目 skills。
 - `sync-manifest.json`：每份 skill 的文件清单与 SHA-256。
 - `tools/sync_skills.py`：显式运行的本地导出工具，默认仅预览。
 
-共 31 个不同 skill 名称、62 份副本。重复名称保留各自作用域，尤其是项目专属的 Chlora 配色规则。系统 skills、插件缓存、个人记忆、任务历史、音频素材和产品源码不在此仓库中。
+共 19 个不同 skill 名称、41 份副本。重复名称保留各自作用域，尤其是项目专属的 Chlora 配色规则。系统 skills、插件缓存、个人记忆、任务历史、音频素材和产品源码不在此仓库中。
 
 ## 使用
 
