@@ -13,7 +13,9 @@ gates, see [verification.md](verification.md).
    kill/respawn churn, and use `tasks: [...]` for sharded sweeps `<name>-1..k`).
    Convergent fix/re-check sub-waves constrained by an exclusive single-writer
    lease, UI Mode A (where Carbon's `2–10` helpers count toward total scale),
-   and standalone `>= 3`-way `web-research` dispatch per their actual leases.
+   and `>= 3`-way `web-research` (mandatory native `swarm`
+   `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or new board)
+   dispatch per their actual leases.
 2. **Primary is a pure dispatcher:** in orchestrated tasks, Primary MUST NOT
    bulk-read large project files, perform bulk code edits, run log forensics, or
    execute multi-file inspections (keeping only lightweight rule/shared-interface
@@ -50,10 +52,12 @@ Pick the matching template (combine for hybrid tasks) and scale to
    + `>= 2` read-only reviewers. Lanes: Hydrogen `medium` (sweeps/checks), Neon
    `medium|high` (specs/scripts/review), Carbon `medium|high` (craft/structure).
 3. **Multi-Dimensional Web Research** *(with `web-research`)*:
-   `3–6+` parallel angle hunters (official docs, papers/specs, compare/pricing,
-   edge cases, counter-evidence) + 1 URL/claim fact-checker + 1 synthesis writer.
-   Lanes: Hydrogen `medium` (`flash` / `gemini-4-hydrogen-medium`) for
-   fetch-before-cite; Neon `medium|high` for deep technical verification.
+   Mandatory native `swarm` (reusing active board or starting a new one) with
+   `3–6+` parallel angle hunters via `tasks: [...]` (official docs, papers/specs,
+   compare/pricing, edge cases, counter-evidence) + 1 URL/claim fact-checker + 1
+   synthesis writer. Lanes: Hydrogen `medium` (`gemini-4-hydrogen-medium`,
+   never `invoke_subagent`) for fetch-before-cite; Neon `medium|high` for deep
+   technical verification.
 4. **Whole-Repo / Multi-Module Code Audit**:
    **`>= 1` read-only worker per major category** (architecture/correctness,
    concurrency/realtime, security/privacy, perf/memory, UI/UX, build/tests);

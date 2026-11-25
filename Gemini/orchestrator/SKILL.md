@@ -76,9 +76,9 @@ and never changes it.
    parallel workers** (use `tasks: [...]` for sharded homogeneous slices
    `<name>-1..k`), with **unlimited cumulative workers** across phases;
    single-writer convergence/fix sub-waves, UI Mode A (counting Carbon's `2–10`
-   helpers toward total scale), and standalone `>= 3`-way `web-research`
-   dispatch per actual lease. Reuse compatible `waiting` workers first via
-   `post_message(text: "@<name> ...")` (zero idle token cost, full context).
+   helpers toward total scale), and `>= 3`-way `web-research` (`swarm`
+   `tasks: [...]`) dispatch per actual lease. Reuse compatible `waiting` workers
+   first via `post_message(text: "@<name> ...")` (zero idle cost, full context).
 3. **Same-category multi-instance (avoid under-staffing):** explicitly spawn
    multiple parallel subagents **within the same work category** whenever work
    splits naturally—e.g., 1+ worker per audit category in repo/doc reviews,
@@ -93,20 +93,20 @@ and never changes it.
    authors** with read-only `verifier`/`reviewer` workers, and enforce **`>= 2`
    parallel independent reviewers** on core changes, Skill updates, large
    refactors, or public releases. Attach an optional progress monitor for long
-   multi-stage swarms (`>= 5` concurrent workers). Keep readers on `workspace:
-   "inherit"`; give concurrent writers disjoint path leases (+ dedicated repo
-   build lanes where required) or `workspace: "share"` (land diffs before any
-   `kill`). Reserve `invoke_subagent` for standalone 3-way `web-research` or
-   single isolated probes when a full Swarm is unnecessary.
+   multi-stage swarms (`>= 5` workers). Keep readers on `workspace: "inherit"`;
+   give writers disjoint path leases (+ dedicated build lanes where required) or
+   `workspace: "share"` (land diffs before `kill`). Dispatch `web-research` via
+   `swarm` (`gemini-4-hydrogen-medium` + `tasks: [...]`, `>= 3`); reserve
+   `invoke_subagent` only for a single lightweight task or read-only visual review.
 
 ## Lanes
 
 | Lane | Native Dispatch | Owns |
 |---|---|---|
 | **Primary** | Session agent (**Pure Dispatcher**) | Framing, decomposition, frozen interfaces & leases, parallel dispatch/tracking, final hub integration & reporting; hands-on ONLY for pure single-step Q&A, live desktop/DAW ops, or Rule 1 quota-0%/route-error fallback |
-| **Carbon** | `swarm` `gemini-4-carbon-medium\|high` (`[Carbon-UI-Lead]` for UI) or `invoke_subagent` `Model: "pro"` | Secondary **Pure Art Director** for UI/visual craft (visual direction, tokens/skeleton, visual critique & final aesthetic sign-off; delegates file reading & coding to 2–10 workers), co-complex slices, non-author review of Neon diffs |
+| **Carbon** | `swarm` `gemini-4-carbon-medium\|high` (`[Carbon-UI-Lead]` for UI) or `invoke_subagent` `Model: "pro"` *(pure read-only single-path visual review only)* | Secondary **Pure Art Director** for UI/visual craft (visual direction, tokens/skeleton, visual critique & final aesthetic sign-off; delegates file reading & coding to 2–10 workers), co-complex slices, non-author review of Neon diffs |
 | **Neon** | `swarm` `gemini-4-neon-low\|medium\|high\|xhigh` (always `swarm` to pin Neon & all 4 tiers) | UI component coding & GUI performance optimization, backend/DSP/concurrency/IPC/protocols/state/tests, Skill/doc authoring & refactoring, deep read-only root-cause & architecture audits, independent review of non-Neon diffs |
-| **Hydrogen** | `swarm` `gemini-4-hydrogen-medium` or `invoke_subagent` `Model: "flash"` | Fast bulk file reading, style/token inventory, mechanical non-UI edits/sweeps, workspace hygiene & secret scanning, scripts/fixtures/probes, non-frontend docs/config, 3-way `web-research`, read-only UI inspection helper |
+| **Hydrogen** | `swarm` `gemini-4-hydrogen-medium` (`+ tasks: [...]` mandatory for `>= 3`-way `web-research`); `invoke_subagent` `Model: "flash"` *(single isolated lightweight task only; never `web-research`)* | Fast bulk file reading, style/token inventory, mechanical non-UI edits/sweeps, workspace hygiene & secret scanning, scripts/fixtures/probes, non-frontend docs/config, `>= 3`-way `web-research` (`swarm`), read-only UI inspection helper |
 | **Argon / External** | User-named only | Not proactively dispatched; exact routes in [references/model-routing.md](references/model-routing.md#user-named-overrides-and-exclusions) |
 
 Neither Primary nor Carbon may **ever** dispatch UI/GUI production code edits to
@@ -179,7 +179,7 @@ a dedicated multi-agent Swarm wave (`5 <= N <= 50`):
 
 - **Separability & pure-dispatcher gate:** standard primary waves scale
   `5 <= N <= 50` (single-writer convergence/fix sub-waves, UI Mode A with `2–10`
-  helpers counted in total scale, and standalone `>= 3`-way `web-research`
+  helpers counted in total scale, and `>= 3`-way `web-research` via native `swarm`
   dispatch per actual lease); keep only pure single-step Q&A, live desktop/DAW
   ops, or Rule 1 quota-0%/route-error fallback on Primary. See
   [references/complexity.md](references/complexity.md) for templates and

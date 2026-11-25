@@ -3,49 +3,60 @@ name: web-research
 description: >-
   Antigravity-only web-research (ignore .agents/skills/web-research and
   .claude/skills/web-research). Multi-source web research requiring at least
-  three parallel Antigravity native Gemini 4 Hydrogen subagents
-  (`invoke_subagent` `Model: "flash"` or native `swarm` `gemini-4-hydrogen-*`,
-  never Magpie proxies) plus lead-agent synthesis with verified live URLs and
-  papers (fetch before cite). Auto-apply for technical docs, APIs, papers,
-  product compare, market pricing, policy tables, obscure-entity/media hunts, or
-  @web-research / 调研 / look up sources. Consult official Anthropic docs for
-  Anthropic/Claude questions.
+  three parallel Antigravity native swarm Gemini 4 Hydrogen workers
+  (`gemini-4-hydrogen-medium|high|xhigh`, never Magpie proxies) plus lead-agent
+  synthesis with verified live URLs and papers (fetch before cite). Auto-apply
+  for technical docs, APIs, papers, product compare, market pricing, policy
+  tables, obscure-entity/media hunts, or @web-research / 调研 / look up sources.
+  Consult official Anthropic docs for Anthropic/Claude questions.
 ---
 
-# Web Research（Antigravity 版 — 原生 Gemini 4 Hydrogen）
+# Web Research（Antigravity 版 — Swarm 原生 Gemini 4 Hydrogen）
 
 > **独立 harness 版本**：仅限 Antigravity（`~/.gemini/config/plugins/cursor-skills/skills/web-research/`），忽略工作区 `.agents/skills/web-research/` 与 `.claude/skills/web-research/`。
 
 目标：**准、全、可复核**——结论可跟、依据可点开、论文/链接须经抓取确认。**错误正例差过「未找到」，严禁编造 URL / DOI / 文献。** 范围：技术文档、API、学术论文、产品/政策/行情对比与冷门实体溯源。
 
-## 原生三路并行检索与核验（强制）
+## 原生 Swarm 三路并行检索与协作（强制）
 
-任何深度（含 Standard 与单事实查询）均强制满足以下规则，不得以任务简单或主代理自行搜索为由省略：
+任何深度（含 Standard 与单事实查询）均强制使用 Antigravity 原生 `swarm` 派发 Hydrogen 工人，**禁止走 `invoke_subagent` / `define_subagent`**，**严禁 Magpie 反代**（用户显式指定其他模型除外），不得以任务简单或主代理自查为由省略：
 
-1. **三路同轮原生 Hydrogen 派发（主代理不计入）**：
-   - 先调用 `define_subagent(Name: "agy-worker-ro", EnableWriteTools: false, EnableSubagentTools: false, ...)` 建立只读防递归联网工人（确保具备 `search_web` 能力且物理禁写、禁递归）。
-   - 在**同一回合**并行派发**至少 3 个**独立 Antigravity 原生 Gemini 4 Hydrogen 子代理：`invoke_subagent(TypeName: "agy-worker-ro", Model: "flash", ...)`（若已在活跃原生 `swarm` 中或需指定强度，亦可用原生 `swarm` `gemini-4-hydrogen-medium|high|xhigh`）。**先全部派发再等待**，严禁逐个串行；严禁调用 `magpie-agent` / `cursor:magpie_agent` 或任何反代路线（用户当前显式点名其他模型时从用户指定）。
-2. **明确分工与完整任务包**：将任务拆成 ≥3 个明确方向（窄题可分：主来源定位 / 独立交叉核对 / 反证与版本边界冲突），不得为凑数引入无关议题。每个子代理须收到完整中文任务包（问题、实体/版本/日期、来源要求、返回格式），实际检索并打开页面，返回结论、已打开 URL、页面证据、适用时间/版本与冲突缺口（无结果时返回实际查询与失败范围）。仅做摘要或审阅的代理不计数；子代理不递归派生。主代理可同步补查但不抵扣 3 路数量。
-3. **独立 `conversationId` 与合规门槛**：逐一核验宿主返回的 **至少 3 个不同 `conversationId`**（或 3 名独立原生 `swarm` Hydrogen 工人）均真实执行了 `search_web` 与只读抓取。单代理多轮检索/并发查询均不能替代 3 个独立子代理。创建失败、未检索或落入非 Hydrogen/反代路线的均不计数，须重派或用 `send_message(Recipient: "<conversationId>", ...)` 组织合规并行轮次（禁事后串行冒充）；若环境并发受限无法满足，须如实说明，不得静默降级后宣称完成。
-4. **原生额度耗尽降级**：当 Antigravity 原生 `Gemini · 7 days` 或 `5 hours` 窗口为 `0%` 或 Hydrogen 不可用时，**严禁静默切往 Magpie 反代模型**；改由主代理直接用 `search_web` + 只读抓取按同等验证标准完成，并在交付中注明“因原生 Gemini 额度耗尽/Hydrogen 不可用，由主代理直查”。
-5. **主代理核验与仲裁整合**：收齐 ≥3 份报告后，主代理亲自打开拟写入最终答案的全部 URL 核验是否支持主张，按实体/原始来源去重（同源转载不算独立证据）；冲突依原始证据、日期、版本、地区与口径仲裁（不按代理多数票），无法裁决时明示分歧。Anthropic/Claude 问题优先查 Anthropic 官方文档；OpenAI/Codex 查 OpenAI 官方开发者文档。
+1. **建/复看板与同轮分片派发（≥ 3 路）**：
+   - 若当前会话尚无活动 swarm，先调 `swarm(action: "title", title: "...")`，并向用户展示 `open_board` 链接；若已有活动 swarm，直接复用当前看板。
+   - 同一回合通过 `tasks` 分片派发 **至少 3 个**独立 `research-1..k` worker（默认 `gemini-4-hydrogen-medium`，深挖/复杂溯源可选 `high|xhigh`；复杂主题按需扩至 5–10+ 路）：
+     ```text
+     swarm(action: "add", name: "research", model: "gemini-4-hydrogen-medium",
+           workspace: "inherit", tasks: ["<角度1>", "<角度2>", "<角度3>", ...],
+           brief: "<共享目标、实体/版本/日期锚点、只读核验纪律与返回格式>")
+     ```
+     异构角度可同轮并行多次 `swarm(action: "add", ...)`；**先全部派发再等待**，严禁串行凑数。
+2. **只读分工与 Swarm 协作**：
+   - 拆分为 ≥ 3 个不重叠方向（窄题拆：主来源定位 / 独立交叉核对 / 反证与版本边界冲突；分片与交叉核验模板见 [reference.md](reference.md#swarm-sharding--cross-check-patterns)）。
+   - worker 均为只读 `workspace: "inherit"`，仅执行 `search_web` 与只读抓取，**严禁改文件、严禁再派生子代理**；须返回结论、已打开 URL、页面证据、适用时间/版本与缺口（无结果写明已试查询与失败范围）。
+   - 发挥看板协作优势：**`#seq` 去重引用**（避免重复贴源）；出现来源/结论冲突时允许 peer 间直接 `@research-<k>` 交叉核验；后续追问直接 `@research-<k>` 热复用 `waiting` worker（零空闲 Token 消耗）。
+3. **独立 `conversation_id` 门槛与唯一兜底**：
+   - 逐一核验 **至少 3 个独立 `conversation_id`** 真实执行了检索与抓取（主代理不计入 3 路；仅摘要/审阅、失败或未实检者不计数，须重派补齐）。
+   - **唯一兜底**：仅当原生 Gemini 池归零（`7d == 0%` 或 `5h == 0%`）或原生 `swarm` 工具故障时，由主代理直接调用 `search_web` + 只读抓取按同等标准完成，并在交付中如实告知原因；严禁回退 Magpie 反代。
+4. **主代理核验与证据仲裁**：
+   - 收齐 ≥ 3 份报告后，主代理亲自打开拟写入最终答案的全部 URL 核验主张，按原始来源去重（同源转载不算独立证据）；冲突依原始证据、日期、版本、地区与口径仲裁（不按代理多数票），无法裁决时明示分歧。
+   - Anthropic / Claude 产品问题优先直查官方 Anthropic 文档（`docs.anthropic.com`）；OpenAI / Codex 查 OpenAI 官方开发者文档。
 
 ## When / Scale
 
 | Need | Depth |
 |---|---|
 | 单事实、报错、官方价格、API 签名 | **Standard**：定位并抓取直接支持结论的主来源；有冲突再补检 |
-| 对比、行情、政策表、全面调研 | **Deep**：按独立子问题与冲突扩展，直至证据覆盖或明确停止 |
+| 对比、行情、政策表、全面调研 | **Deep**：按独立子问题扩至 5–10+ 路，直至证据覆盖或明确停止 |
 | 论文 / 学术主张 | **Academic**：优先 DOI / arXiv / 出版社页；见 [reference.md](reference.md#academic--papers) |
 | 旧应用 / 实机视频 / 下架软件 | **Obscure**：身份锚定 → 验证 → 负结论 OK；见 [reference.md](reference.md#obscure-entity--media-hunts) |
 
 ## Workflow & Stopping
 
 1. **Classify**：时效、版本、名称撞车、论文还是产品页？
-2. **Anchors & Dispatch**：实体全名 + 消歧项（开发商 / ID / 作者 / 年份），同轮并行派发 ≥3 路原生 Hydrogen。
-3. **Search Rounds**：A 官方/主键（`site:`、商店 API）→ B 实务（GitHub、论坛、SO）→ C 学术（Scholar 线索 → DOI/arXiv 落地页）→ D 补洞（去过时与 SEO 污染）。
-4. **Collect & Verify**：收齐 ≥3 路报告，主代理逐项抓取核验拟引用 URL，失败剔除。
-5. **Synthesize**：去重、仲裁冲突、统一输出，缺口进「未覆盖」。
+2. **Anchors & Swarm Dispatch**：实体全名 + 消歧项（开发商 / ID / 作者 / 年份），新建或复用 swarm 看板，同轮 `tasks` 分片并行派发 ≥ 3 路 `research-1..k`。
+3. **Search Rounds & Cross-Check**：A 官方/主键（`site:`、商店 API）→ B 实务（GitHub、论坛、SO）→ C 学术（Scholar 线索 → DOI/arXiv 落地页）→ D 补洞；冲突用 `#seq` / `@research-<k>` 交叉核验。
+4. **Collect & Verify**：核验 ≥ 3 个独立 `conversation_id` 报告，主代理逐项抓取核验拟引用 URL，失败剔除。
+5. **Synthesize**：去重、仲裁冲突、统一输出，缺口进「未覆盖」；后续追问 `@research-<k>` 热复用。
 
 **停止条件**：子问题已答，或两个独立权威来源在同口径下一致；锚点穷尽仍无结果 → **未找到**（不塞近似结果）。停止条件仅控深度，不跳过 3 路派发与收集。
 
@@ -96,4 +107,4 @@ description: >-
 
 ## Anti-Patterns
 
-- 凭记忆答时效/需引用的问题；仅单路搜索或只贴搜索摘要；**编造** DOI/链接；未打开即引用视频/论文；用近似结果充依据；二手将比价爬虫当成交或混入未标注新价。
+- 凭记忆答时效/需引用的问题；绕开原生 `swarm` 走 `invoke_subagent` / `define_subagent` 或 Magpie 反代；仅单路搜索或只贴搜索摘要；**编造** DOI/链接；未打开即引用视频/论文；用近似结果充依据；二手将比价爬虫当成交或混入未标注新价。

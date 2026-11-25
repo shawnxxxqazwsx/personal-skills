@@ -13,8 +13,8 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
 | Model | Native Dispatch & Exact IDs | Primary Role |
 |---|---|---|
 | **Neon** | `swarm` `gemini-4-neon-low\|medium\|high\|xhigh` *(always `swarm`; `invoke_subagent` only exposes `flash`/`pro`/`inherit`)* | Default engineering worker: UI coding & GUI perf, backend/DSP/concurrency/protocols/tests, Skill authoring, parallel debug, deep audits, non-Neon independent review |
-| **Carbon** | `swarm` `gemini-4-carbon-low\|medium\|high` *(UI `[Carbon-UI-Lead]` uses `medium\|high` only)* or `invoke_subagent(..., Model: "pro")` *(read-only visual review only)* | Secondary UI Art Lead (`[Carbon-UI-Lead]`): visual direction, tokens/skeleton, aesthetic review & sign-off; non-author review of Neon diffs |
-| **Hydrogen** | `swarm` `gemini-4-hydrogen-low\|medium\|high\|xhigh` or `invoke_subagent(..., Model: "flash")` | Fast 1M-context worker: sharded file reading/inventory, repo/log sweeps, `web-research`, mechanical scripts/cleanup, volume/regex pre-scans, read-only/inventory `[Carbon-UI-Helper]` |
+| **Carbon** | `swarm` `gemini-4-carbon-low\|medium\|high` *(UI `[Carbon-UI-Lead]` uses `medium\|high` only)* or `invoke_subagent(..., Model: "pro")` *(pure read-only single-path visual review only)* | Secondary UI Art Lead (`[Carbon-UI-Lead]`): visual direction, tokens/skeleton, aesthetic review & sign-off; non-author review of Neon diffs |
+| **Hydrogen** | `swarm` `gemini-4-hydrogen-low\|medium\|high\|xhigh` *(`gemini-4-hydrogen-medium` + `tasks: [...]` mandatory for `>= 3`-way `web-research`)* or `invoke_subagent(..., Model: "flash")` *(single isolated lightweight task only; never `web-research`)* | Fast 1M-context worker: sharded file reading/inventory, repo/log sweeps, `>= 3`-way `web-research` (`swarm`), mechanical scripts/cleanup, volume/regex pre-scans, read-only/inventory `[Carbon-UI-Helper]` |
 | **Argon** | `swarm` `gemini-4-argon-low\|medium\|high` | Default `medium`; **user-named only** (never proactively dispatched) |
 
 - **Persona / anthropomorphic content:** native **Neon**
@@ -26,7 +26,7 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
 |---|---|---|---|
 | **Neon** | `medium` (`high` for reviews) | `low\|medium`: sharded UI/component coding, routine backend/CLI/Skill edits<br>`medium\|high`: GUI perf, substantive DSP/backend, parallel debug hypotheses, module audits<br>`high\|xhigh`: realtime/lock-free concurrency, **multi-way (`>= 2`) non-author reviews** & security/logic audits | Implementation peers (`low\|medium\|high`) ↔ `@ui-carbon` or read-only `verifier` (`high\|xhigh`) direct fix loops; escalate frozen interface/lease changes to `@coordinator` |
 | **Carbon** | `medium` | `medium`: `[Carbon-UI-Lead]` visual review/sign-off, non-author review of Neon diffs<br>`high`: 0-to-1 visual design systems, major redesigns, heavy cross-surface aesthetic or Neon-diff audits | Acts as `@ui-carbon` peer hub (`medium\|high`) directing `2–10` Neon/Hydrogen UI peers and approving final diffs before `@coordinator [done]` |
-| **Hydrogen** | `medium` | `medium`: directory-sharded file/style/asset inspection, `>= 3` `web-research` lanes, workspace cleanup, pre-push secret/volume sweeps (never UI production code edits from Primary or Carbon) | Fast reader/scanner peers (`medium`) feeding findings directly to `@ui-carbon` or Neon auditors via `@<peer>` & `#seq` |
+| **Hydrogen** | `medium` | `medium`: directory-sharded file/style/asset inspection, `>= 3`-way `web-research` (`swarm` + `tasks: [...]`), workspace cleanup, pre-push secret/volume sweeps (never UI production code edits from Primary or Carbon) | Fast reader/scanner peers (`medium`) feeding findings directly to `@ui-carbon` or Neon auditors via `@<peer>` & `#seq` |
 
 ## General Scenario Lane Routing
 
@@ -34,7 +34,7 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
 |---|---|---|
 | **Audio / Backend / Systems** *(+ `immersive-audio` / `daw-control` when active)* | Neon (`medium\|high\|xhigh`) for DSP/realtime/host/bridge/tests + Hydrogen (`medium`) for repo/log sweeps & fixtures | `>= 2` non-author reviewers (Neon `high\|xhigh` / Carbon `medium\|high`) |
 | **Skill Authoring & Review** | Hydrogen (`medium`) for cross-file inventory/link checks + Neon (`low\|medium`) for Skill/reference edits | `>= 2` independent read-only reviewers (Neon `high` / Carbon `medium`) |
-| **Multi-Way Retrieval** *(+ `web-research`)* | `>= 3` parallel Hydrogen (`medium`) researchers (`swarm` or standalone `invoke_subagent` `flash`) + Neon (`medium`) or Primary synthesis | Live URL/source cross-check before citing |
+| **Multi-Way Retrieval** *(+ `web-research`)* | Mandatory native `swarm`: `>= 3` parallel Hydrogen (`gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or starting new board) + Neon (`medium`) or Primary synthesis *(never `invoke_subagent`)* | Live URL/source cross-check before citing |
 | **Repo / Multi-Module Audit** | Directory-sharded Hydrogen (`medium`) sweeps + category-split Neon (`medium\|high`) deep audits | `>= 2` independent reviewers cross-checking findings (Neon `high` / Carbon `medium\|high`) |
 | **Multi-Hypothesis Parallel Debug** | `>= 2` parallel Neon (`medium\|high`) hypothesis investigators + Hydrogen (`medium`) log/code/git sweeps + Neon (`high\|xhigh`) fix | `>= 2` independent reviewers (Neon `high` / Carbon `medium`) re-checking failure signal & regression |
 | **UI Updates** *(+ `chlora-ui` when active)* | Carbon (`medium\|high`, `[Carbon-UI-Lead]`) art lead + `2–10` workers: Hydrogen (`medium`) read-only file reading/inventory + Neon (`low\|medium\|high`) UI coding & GUI perf | Carbon visual sign-off + `>= 1` non-author code reviewer (`>= 2` independent reviewers total on core/large UI overhauls) |
@@ -48,8 +48,9 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
   **same-category multi-instance sharding** (`>= 2` independent reviewers,
   directory-sharded inspection, parallel debug hypotheses). Single-writer
   convergence fix/verify sub-waves bound by exclusive write leases, UI Mode A
-  (whose `2–10` helpers count toward total scale), and standalone `>= 3`-way
-  `web-research` dispatch per actual lease scope. Primary (`coordinator`) is
+  (whose `2–10` helpers count toward total scale), and `>= 3`-way `web-research`
+  (mandatory native `swarm` `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing
+  active or new board) dispatch per actual lease scope. Primary (`coordinator`) is
   **pure scheduler** and does not occupy a business read/write slot.
 - **UI Dual-Mode (`[Carbon-UI-Lead]` + `2–10` Engineering Subagents):**
   - **Carbon (`gemini-4-carbon-medium|high`, `[Carbon-UI-Lead]`)** is strictly
@@ -118,15 +119,18 @@ warm follow-ups):
    "inherit"|"share", brief: "<中文任务包>")` (use `tasks: [...]` for sharded
    homogeneous slices). `post_message`, `read_board`, and `swarm_wait` unlock on
    the turn after the first `add`.
-2. **`define_subagent` / `invoke_subagent` (isolated lightweight packets or
-   standalone `web-research`):**
-   - Ordinary workers: define once per session via `define_subagent(Name:
-     "agy-worker-rw" | "agy-worker-ro", EnableWriteTools: true | false,
-     EnableSubagentTools: false, ...)` so nested spawning is physically blocked.
+2. **`define_subagent` / `invoke_subagent` (single isolated lightweight task or
+   pure read-only single-path visual review ONLY — NEVER `web-research`):**
+   - Ordinary single-path lightweight worker: define once per session via
+     `define_subagent(Name: "agy-worker-rw" | "agy-worker-ro", EnableWriteTools:
+     true | false, EnableSubagentTools: false, ...)` so nested spawning is
+     physically blocked. All `>= 3`-way `web-research` **must** use native
+     `swarm` (`gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or
+     starting a new board).
    - UI tasks: any task with UI code or GUI performance changes **must** use
      `swarm` (so Neon handles coding/perf alongside Carbon Art Lead);
-     `invoke_subagent(..., Model: "pro")` is restricted to read-only visual
-     review or pure design specs.
+     `invoke_subagent(..., Model: "pro")` is restricted to pure read-only
+     single-path visual review.
 3. **Read-only & write isolation:** read-only reviewers/diagnosticians use
    `workspace: "inherit"` with explicit read-only rules. Concurrent writers use
    disjoint path leases (+ dedicated repo build lanes where required) or
