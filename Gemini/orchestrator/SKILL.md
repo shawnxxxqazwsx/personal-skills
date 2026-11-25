@@ -6,12 +6,13 @@ description: >-
   daily Skill authoring/refactoring/review, multi-angle web research, whole-repo
   code/doc audits, multi-hypothesis debugging, full-stack/script development, UI
   updates, and local workspace cleanup + public GitHub publishing (ignore
-  .agents/skills/orchestrator and .claude/skills/orchestrator). Enforce Pure
-  Dispatcher Primary, 100% native Gemini quota (`7d > 0%` & `5h > 0%`), zero
-  auto Magpie proxy calls, Swarm-First scaling (`5 <= N <= 50`/wave, unlimited
-  cumulative, same-category multi-instance, direct `@peer` handoffs), Carbon
-  Pure Art Lead + `2–10` UI engineering/inspection workers, and permanent public
-  GitHub secret/ops-safety redlines.
+  .agents/skills/orchestrator and .claude/skills/orchestrator). Enforce two-tier
+  routing—Light Tier (`0 <= N <= 5`) strictly for ultra-simple 1–3 file local
+  tweaks and Standard Tier (`5 <= N <= 50`/wave, unlimited cumulative, Pure
+  Dispatcher Primary, same-category multi-instance, direct `@peer` handoffs)—
+  with 100% native Gemini quota (`7d > 0%` & `5h > 0%`), zero auto Magpie proxy
+  calls, Carbon Pure Art Lead + `2–10` UI workers, and permanent public GitHub
+  secret/ops-safety redlines.
 ---
 
 # Orchestrator (Antigravity edition)
@@ -34,12 +35,10 @@ and never changes it.
   documentation audits, parallel multi-hypothesis debugging, frontend/backend/
   script development, UI overhauls, and local workspace cleanup + GitHub
   publishing.
-- **Explicit cross-skill allowlist:** this skill collaborates **only** with
-  `{web-research, immersive-audio, daw-control, chlora-ui}`.
-- When an allowlisted domain skill activates alongside `orchestrator`, that
-  skill owns domain engineering, design, validation, and safety policy;
-  `orchestrator` owns model routing, native-first priority, dispatcher/worker
-  division of labor, parallel scaling, review dispatch, and disjoint leases.
+- **Explicit cross-skill allowlist:** collaborates **only** with
+  `{web-research, immersive-audio, daw-control, chlora-ui}` (domain skills own
+  domain engineering/design/validation/safety; `orchestrator` owns routing,
+  native-first priority, tiering, review dispatch, and disjoint leases).
 
 ## Rule 1: Native-First; Never Auto-Call Magpie Proxies
 
@@ -58,27 +57,36 @@ and never changes it.
    `ai-studio/gemini-4-*`, native-first Claude, Grok, DeepSeek, Codex) live in
    [references/model-routing.md](references/model-routing.md#user-named-overrides-and-exclusions).
 
-## Rule 1.5: Pure Dispatcher Primary & Swarm-First Array (`5–50`/Wave)
+## Rule 1.5: Two-Tier Scaling (`Light 0–5` / `Standard 5–50`) & Pure Dispatcher
 
-1. **Pure Dispatcher Primary (Hard Rule):** once orchestration mode activates,
-   Primary is **forbidden from performing hands-on execution**—never bulk-read
-   large files, edit business code, author long docs, or run item-by-item
-   debugging directly. Primary **exclusively** owns task decomposition, freezing
-   shared interfaces and disjoint write leases, parallel dispatch and progress
-   tracking, integrating/merging worker outputs (including final hub-file
-   integration), and reporting. **Only exceptions:** pure single-step Q&A, live
-   interactive desktop/DAW operations, or Rule 1 native-quota-0%/route-error
-   fallback.
-2. **Parallel scale (`5 <= N <= 50`/wave, unlimited cumulative):** assemble one
-   unified Antigravity native `swarm` (`swarm(action: "title", ...)` + parallel
-   `swarm(action: "add", ...)`; surface the returned `open_board` line).
-   Standard primary orchestration waves dispatch **at least 5 and up to 50
-   parallel workers** (use `tasks: [...]` for sharded homogeneous slices
-   `<name>-1..k`), with **unlimited cumulative workers** across phases;
-   single-writer convergence/fix sub-waves, UI Mode A (counting Carbon's `2–10`
-   helpers toward total scale), and `>= 3`-way `web-research` (`swarm`
-   `tasks: [...]`) dispatch per actual lease. Reuse compatible `waiting` workers
-   first via `post_message(text: "@<name> ...")` (zero idle cost, full context).
+1. **Pure Dispatcher Primary (Standard Tier Hard Rule):** once Standard Tier
+   orchestration activates, Primary is **forbidden from hands-on execution**—
+   never bulk-read large files, edit business code, author long docs, or run
+   item-by-item debugging directly. Primary **exclusively** owns decomposition,
+   frozen interfaces & write leases, parallel dispatch/tracking, final hub
+   integration, and reporting. **Only exceptions:** **Light Tier (`N = 0`
+   ultra-simple 1–3 file local tweaks)**, pure single-step Q&A, live desktop/DAW
+   ops, or Rule 1 native-quota-0%/route-error fallback.
+2. **Two-tier parallel scale (strict anti-abuse gate):**
+   - **Light Tier (`0 <= N <= 5`/wave):** strictly for ultra-simple 1–3 tightly
+     coupled file local tweaks (minor feature/copy/config/local Skill tweaks or
+     small single-point patches). Allows `N = 0` (Primary directly edits &
+     verifies) or `1 <= N <= 5` native helpers (lightweight `swarm` or single
+     `invoke_subagent`). **Anti-abuse escalation:** NEVER stay in Light Tier for
+     `>= 2` independent modules, whole-repo/multi-category audits,
+     multi-hypothesis debug, UI visual+engineering updates, large Skill
+     refactors, workspace cleanup/public GitHub pushes, or `>= 3`-way
+     `web-research` (always native `swarm`)—escalate to Standard Tier. Native-
+     first, no-auto-Magpie, no-Hydrogen-UI-code, and public GitHub security
+     redlines NEVER relax in either tier.
+   - **Standard Tier (`5 <= N <= 50`/wave, unlimited cumulative):** assemble one
+     unified native `swarm` (`swarm(action: "title", ...)` + parallel
+     `swarm(action: "add", ...)`; show `open_board`). Standard waves dispatch
+     **5–50 parallel workers** (`tasks: [...]` for sharded slices `<name>-1..k`,
+     unlimited cumulative across phases; single-writer convergence/fix sub-waves,
+     UI Mode A counting Carbon's `2–10` helpers, and `>= 3`-way `web-research`
+     via `swarm` `tasks: [...]` dispatch per actual lease). Reuse `waiting`
+     workers first via `post_message(text: "@<name> ...")` (zero idle cost).
 3. **Same-category multi-instance (avoid under-staffing):** explicitly spawn
    multiple parallel subagents **within the same work category** whenever work
    splits naturally—e.g., 1+ worker per audit category in repo/doc reviews,
@@ -103,7 +111,7 @@ and never changes it.
 
 | Lane | Native Dispatch | Owns |
 |---|---|---|
-| **Primary** | Session agent (**Pure Dispatcher**) | Framing, decomposition, frozen interfaces & leases, parallel dispatch/tracking, final hub integration & reporting; hands-on ONLY for pure single-step Q&A, live desktop/DAW ops, or Rule 1 quota-0%/route-error fallback |
+| **Primary** | Session agent (**Pure Dispatcher** in Standard Tier) | Framing, decomposition, frozen interfaces & leases, parallel dispatch/tracking, final hub integration & reporting; hands-on ONLY for Light Tier (`N = 0`) ultra-simple local tweaks, pure single-step Q&A, live desktop/DAW ops, or Rule 1 quota-0%/route-error fallback |
 | **Carbon** | `swarm` `gemini-4-carbon-medium\|high` (`[Carbon-UI-Lead]` for UI) or `invoke_subagent` `Model: "pro"` *(pure read-only single-path visual review only)* | Secondary **Pure Art Director** for UI/visual craft (visual direction, tokens/skeleton, visual critique & final aesthetic sign-off; delegates file reading & coding to 2–10 workers), co-complex slices, non-author review of Neon diffs |
 | **Neon** | `swarm` `gemini-4-neon-low\|medium\|high\|xhigh` (always `swarm` to pin Neon & all 4 tiers) | UI component coding & GUI performance optimization, backend/DSP/concurrency/IPC/protocols/state/tests, Skill/doc authoring & refactoring, deep read-only root-cause & architecture audits, independent review of non-Neon diffs |
 | **Hydrogen** | `swarm` `gemini-4-hydrogen-medium` (`+ tasks: [...]` mandatory for `>= 3`-way `web-research`); `invoke_subagent` `Model: "flash"` *(single isolated lightweight task only; never `web-research`)* | Fast bulk file reading, style/token inventory, mechanical non-UI edits/sweeps, workspace hygiene & secret scanning, scripts/fixtures/probes, non-frontend docs/config, `>= 3`-way `web-research` (`swarm`), read-only UI inspection helper |
@@ -177,18 +185,19 @@ a dedicated multi-agent Swarm wave (`5 <= N <= 50`):
 
 ## Separability, Lifecycle, Ownership & State Machine
 
-- **Separability & pure-dispatcher gate:** standard primary waves scale
-  `5 <= N <= 50` (single-writer convergence/fix sub-waves, UI Mode A with `2–10`
-  helpers counted in total scale, and `>= 3`-way `web-research` via native `swarm`
-  dispatch per actual lease); keep only pure single-step Q&A, live desktop/DAW
-  ops, or Rule 1 quota-0%/route-error fallback on Primary. See
-  [references/complexity.md](references/complexity.md) for templates and
-  phase-scoped resource manifests.
+- **Separability & two-tier gate:** route ultra-simple 1–3 file local tweaks to
+  **Light Tier (`0 <= N <= 5`)** (`N = 0` Primary direct or `<= 5` helpers);
+  escalate multi-module, audit, debug, UI, large Skill refactor, or public-push
+  work to **Standard Tier (`5 <= N <= 50`)** (single-writer convergence
+  sub-waves, UI Mode A with `2–10` helpers, and `>= 3`-way `web-research` via
+  `swarm` dispatch per actual lease). Hands-on Primary work is strictly limited
+  to Light Tier (`N = 0`), single-step Q&A, live desktop/DAW ops, or Rule 1
+  fallback. See [references/complexity.md](references/complexity.md).
 - **Small decision record (before dispatching):** (1) classify operation
   (`inspect`/`plan`/`change`/`validate`/`review`/`deploy`/`publish`) without
   widening authorization; (2) define observable success signal & first
-  falsifier; (3) list mutable resources & single owners; (4) assign wave size
-  (`5–50`), same-category parallelism, and native lanes.
+  falsifier; (3) list mutable resources & single owners; (4) assign tier & wave
+  size (`Light 0–5` or `Standard 5–50`), same-category parallelism, and lanes.
 - **Lifecycle & proportional coordination:** frame before dispatch; reassess and
   launch next waves after diagnosis, interface freeze, first green pass, worker
   returns, and repeated failures—never regress to single-threaded Primary work.
@@ -227,12 +236,14 @@ for `swarm` workers, require final reply format `@coordinator [done] <summary>`:
 
 ## Review, Validation & Reporting
 
-- **Multi-path independent review (mandatory on core changes, Skill updates,
-  large refactors & public pushes):** dispatch **`>= 2` independent read-only
-  reviewers** in parallel following the non-author rule—native **Neon**
-  (`gemini-4-neon-high|xhigh`) for non-Neon diffs, and native **Carbon**
-  (`gemini-4-carbon-medium|high` / `Model: "pro"`) for Neon diffs (plus
-  security/privacy reviewers for GitHub pushes). Return severity-ranked
+- **Tiered independent review:** in **Light Tier**, ultra-light local tweaks
+  (`N = 0` or 1–3 files) need only Primary self-check or 1 lightweight read-only
+  reviewer (substantive Skill rule changes still warrant `>= 2` reviewers). In
+  **Standard Tier** (core changes, Skill refactors, large edits) and **all
+  public GitHub pushes (both tiers)**, dispatch **`>= 2` parallel independent
+  read-only reviewers** (non-author rule: native **Neon** `high|xhigh` for
+  non-Neon diffs; native **Carbon** `medium|high` or `Model: "pro"` for Neon
+  diffs; plus security/privacy reviewers for pushes). Return severity-ranked
   `[P0]`–`[P3]` findings with `path:line`, failure scenario, and acceptance check
   (or `No findings.`).
 - **Primary final acceptance:** verify real disk diffs, raw command outputs, and

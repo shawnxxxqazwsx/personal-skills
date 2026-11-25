@@ -22,29 +22,36 @@ layers instead of claiming closure. Record the tested revision, built artifact,
 deployed path (if any), and runtime config; after an in-place update, confirm
 the running process or host actually loaded the new binary/artifact.
 
-## Multi-Way Independent Review Gate (Mandatory `>= 2`)
+## Multi-Way Independent Review Gate (Tiered)
 
-For core code changes, Skill updates, large-scale refactors, or public releases,
-dispatch **at least 2 independent read-only review subagents** in parallel
-before merge or delivery:
-
-- **Non-author & cross-perspective rule:** reviewers must never be the author of
-  the diff under review. Combine distinct models and/or orthogonal lenses (e.g.,
-  read-only Neon `high|xhigh` on correctness, contracts, and security +
-  read-only Carbon `medium|high` on Neon diffs, architecture, or visual craft).
-- **Evidence-backed findings:** reviewers inspect actual files, diffs, and raw
-  command output on disk and report severity-ranked `[P0]`–`[P3]` findings with
-  `path:line`, failure scenario, and acceptance check (or `No findings.`).
-- **Closure:** resolve and re-verify every `[P0]`/`[P1]` finding before
-  integration; keep fix↔review loops bounded and peer-addressed (`@<author>` ↔
-  `@<reviewer>`).
+- **Light Tier (`0 <= N <= 5` ultra-lightweight edits):** for ultra-simple
+  `N = 0` or 1–3 tightly coupled file micro-tweaks (minor copy, config, or local
+  patch), Primary direct verification or **1 lightweight read-only check**
+  suffices. Any substantive Skill rule change (e.g., modifying core routing,
+  gating, or safety policy) still warrants **`>= 2` independent read-only
+  reviewers**.
+- **Standard Tier (mandatory `>= 2`):** for core code changes, substantive Skill
+  updates, large-scale refactors, or public releases, dispatch **at least 2
+  independent read-only review subagents** in parallel before merge or delivery:
+  - **Non-author & cross-perspective rule:** reviewers must never be the author
+    of the diff under review. Combine distinct models and/or orthogonal lenses
+    (e.g., read-only Neon `high|xhigh` on correctness, contracts, and security +
+    read-only Carbon `medium|high` on Neon diffs, architecture, or visual craft).
+  - **Evidence-backed findings:** reviewers inspect actual files, diffs, and raw
+    command output on disk and report severity-ranked `[P0]`–`[P3]` findings
+    with `path:line`, failure scenario, and acceptance check (or `No findings.`).
+  - **Closure:** resolve and re-verify every `[P0]`/`[P1]` finding before
+    integration; keep fix↔review loops bounded and peer-addressed (`@<author>` ↔
+    `@<reviewer>`).
 
 ## Workspace Cleanup & Public GitHub Push Security Gate (Hard Redline)
 
-Before pushing any source code or Skill to a public GitHub repository, dispatch
-dedicated read-only security & privacy audit subagents (within the `>= 2`
-independent review gate) to scan **100% of candidate files, staged diffs, and
-git history if sensitive data was ever committed**:
+**Non-negotiable across BOTH Light Tier and Standard Tier**—no Light Tier
+exemption applies to public pushes. Before pushing any source code or Skill to a
+public GitHub repository, dispatch dedicated read-only security & privacy audit
+subagents (within the `>= 2` independent review gate) to scan **100% of
+candidate files, staged diffs, and git history if sensitive data was ever
+committed**:
 
 - **Permanently forbidden from public upload (zero exceptions):**
   1. **Any server-operations Skills, configs, or scripts:** SSH keys or
@@ -89,5 +96,6 @@ A worker's `[done]` post is a claim, not acceptance. Before integrating:
 Keep observation conditions attached to every performance, visual, hardware,
 security, or external-service claim—a unit test, mock, or screenshot never
 proves end-to-end integration. Primary performs final acceptance only after
-layered validation, `>= 2` independent reviews, and (for public pushes) the hard
-redline security audit all pass per [../SKILL.md](../SKILL.md).
+layered validation, the applicable review tier (Light Tier self-check/1-reviewer
+or Standard Tier `>= 2` independent reviews), and—for any public GitHub push in
+either tier—the hard redline security audit all pass per [../SKILL.md](../SKILL.md).

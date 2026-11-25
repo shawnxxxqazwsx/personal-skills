@@ -32,7 +32,8 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
 
 | Scenario | Primary Lanes & Multi-Instance Split | Mandatory Review / Gate |
 |---|---|---|
-| **Audio / Backend / Systems** *(+ `immersive-audio` / `daw-control` when active)* | Neon (`medium\|high\|xhigh`) for DSP/realtime/host/bridge/tests + Hydrogen (`medium`) for repo/log sweeps & fixtures | `>= 2` non-author reviewers (Neon `high\|xhigh` / Carbon `medium\|high`) |
+| **Light Tier (`0 <= N <= 5`)** *(ultra-simple local feature or small Skill tweak: 1–3 tightly coupled files ONLY)* | `N = 0`: Primary edits & verifies directly; `1 <= N <= 5`: `<= 5` concurrent native workers (light `swarm` or single `invoke_subagent`; Neon `low\|medium` for small code/Skill tweaks, Hydrogen `medium` for quick checks; no auto-Magpie; no Hydrogen UI edits) | Primary self-check or 1 read-only check; **must escalate to Standard Tier** for `>= 2` independent modules, audits, parallel debug, UI overhauls, large Skill refactors, `>= 3`-way `web-research`, or workspace push (public GitHub security gate never relaxes) |
+| **Audio / Backend / Systems** *(Standard Tier; + `immersive-audio` / `daw-control` when active)* | Neon (`medium\|high\|xhigh`) for DSP/realtime/host/bridge/tests + Hydrogen (`medium`) for repo/log sweeps & fixtures | `>= 2` non-author reviewers (Neon `high\|xhigh` / Carbon `medium\|high`) |
 | **Skill Authoring & Review** | Hydrogen (`medium`) for cross-file inventory/link checks + Neon (`low\|medium`) for Skill/reference edits | `>= 2` independent read-only reviewers (Neon `high` / Carbon `medium`) |
 | **Multi-Way Retrieval** *(+ `web-research`)* | Mandatory native `swarm`: `>= 3` parallel Hydrogen (`gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or starting new board) + Neon (`medium`) or Primary synthesis *(never `invoke_subagent`)* | Live URL/source cross-check before citing |
 | **Repo / Multi-Module Audit** | Directory-sharded Hydrogen (`medium`) sweeps + category-split Neon (`medium\|high`) deep audits | `>= 2` independent reviewers cross-checking findings (Neon `high` / Carbon `medium\|high`) |
@@ -42,16 +43,27 @@ All native Gemini models share the single Antigravity `Gemini · 7 days` /
 
 ## Parallel Scale & UI Dual-Mode Routing
 
-- **Orchestration scale (`5 <= N <= 50` main parallel scale, cumulative
-  unlimited):** standard orchestration dispatches **5–50** parallel workers per
-  main wave (cap 50/wave, unlimited cumulative), split by category with
-  **same-category multi-instance sharding** (`>= 2` independent reviewers,
-  directory-sharded inspection, parallel debug hypotheses). Single-writer
-  convergence fix/verify sub-waves bound by exclusive write leases, UI Mode A
-  (whose `2–10` helpers count toward total scale), and `>= 3`-way `web-research`
-  (mandatory native `swarm` `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing
-  active or new board) dispatch per actual lease scope. Primary (`coordinator`) is
-  **pure scheduler** and does not occupy a business read/write slot.
+- **Light Tier (`0 <= N <= 5`, strict local scope):** reserved exclusively for
+  ultra-simple, ultra-lightweight local changes (single file or 1–3 tightly
+  coupled files, small copy/config/local Skill tweaks). Allows **`N = 0`** on
+  Primary (explicitly exempt from the Standard Tier pure-scheduler ban) or
+  **`1 <= N <= 5`** concurrent native subagents (cap 5/wave; Neon `low|medium`
+  for edits, Hydrogen `medium` for quick checks; never auto-Magpie, never
+  Hydrogen editing UI code). **Escalation gate:** any task involving `>= 2`
+  independent modules, repo/multi-category audits, parallel debug, UI
+  visual+engineering updates, large Skill overhauls, workspace cleanup/public
+  GitHub push, or `>= 3`-way `web-research` (always native `swarm`) **must**
+  enter Standard Tier.
+- **Standard Tier (`5 <= N <= 50`/wave, cumulative unlimited):** standard
+  orchestration dispatches **5–50** parallel workers per main wave (cap 50/wave,
+  unlimited cumulative), split by category with **same-category multi-instance
+  sharding** (`>= 2` independent reviewers, directory-sharded inspection,
+  parallel debug hypotheses). Single-writer convergence fix/verify sub-waves
+  bound by exclusive write leases, UI Mode A (whose `2–10` helpers count toward
+  total scale), and `>= 3`-way `web-research` (mandatory native `swarm`
+  `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or new board)
+  dispatch per actual lease scope. Primary (`coordinator`) is **pure scheduler**
+  and does not occupy a business read/write slot.
 - **UI Dual-Mode (`[Carbon-UI-Lead]` + `2–10` Engineering Subagents):**
   - **Carbon (`gemini-4-carbon-medium|high`, `[Carbon-UI-Lead]`)** is strictly
     secondary **UI Art Lead** (visual direction, design tokens/skeleton,
@@ -151,8 +163,9 @@ Verify execution after every delegated worker returns:
 - **Antigravity native (`invoke_subagent` and `swarm`):** verify returned
   `conversationId` or `swarm(action: "status")` / `read_board` `[done]` posts
   plus real file diffs and raw command outputs on disk.
-- **User-named external Magpie routes (including `ai-studio/gemini-4-*`,
-  via `~/.local/bin/magpie-agent` / `cursor:magpie_agent`):** verify `receipt.status == "verified"` in the
-  returned JSON reconciled against `~/.config/magpie/usage.jsonl` (`req`,
-  `served`, `effort`, `http_status == 200`; for Grok also `served ==
-  "grok-4.7@256k"` and `tier_sent == "priority"`).
+- **User-named external Magpie routes (including `ai-studio/gemini-4-*`, via
+  `~/.local/bin/magpie-agent` / `cursor:magpie_agent`):** verify
+  `receipt.status == "verified"` in the returned JSON reconciled against
+  `~/.config/magpie/usage.jsonl` (`req`, `served`, `effort`,
+  `http_status == 200`; for Grok also `served == "grok-4.7@256k"` and
+  `tier_sent == "priority"`).

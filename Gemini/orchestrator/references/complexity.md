@@ -5,31 +5,48 @@ protect concurrent write/build lanes. For model IDs, effort tiers, and quota
 math, see [model-routing.md](model-routing.md); for multi-reviewer and security
 gates, see [verification.md](verification.md).
 
-## Orchestration Scale & Primary Role Boundary
+## Tiered Scale & Primary Role Boundary
 
-1. **Swarm sizing (`5 <= N <= 50` main parallel scale):** standard orchestrated
-   main parallel waves dispatch **5–50** subagents (`50`/wave ceiling; unlimited
-   cumulative workers across phases—prefer warm reuse via `@<name>` over
-   kill/respawn churn, and use `tasks: [...]` for sharded sweeps `<name>-1..k`).
-   Convergent fix/re-check sub-waves constrained by an exclusive single-writer
-   lease, UI Mode A (where Carbon's `2–10` helpers count toward total scale),
-   and `>= 3`-way `web-research` (mandatory native `swarm`
-   `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or new board)
-   dispatch per their actual leases.
-2. **Primary is a pure dispatcher:** in orchestrated tasks, Primary MUST NOT
-   bulk-read large project files, perform bulk code edits, run log forensics, or
-   execute multi-file inspections (keeping only lightweight rule/shared-interface
-   header reads, final acceptance diff/receipt checks, pure single-step Q&A,
-   live desktop/DAW ops, or Rule 1 native-quota-0%/route-error fallback).
-   Primary owns framing, decomposition, frozen interfaces/write leases,
-   escalations, and final integration.
-3. **Same-category multi-spawn (encouraged):** spawn multiple workers **within
+1. **Two-tier scale split (`Light` vs. `Standard`):**
+   - **Light Tier (`0 <= N <= 5`, hard cap `5`/wave):** strictly for
+     ultra-lightweight, ultra-simple local tasks—single-file or 1–3 tightly
+     coupled file micro-tweaks (minor feature/copy/config tweak, small local
+     Skill edit, or single-point patch). Allows **`N = 0`** (Primary directly
+     reads, edits, and verifies, exempt from the Standard pure-dispatcher ban);
+     when helpers are used, dispatch **`1 <= N <= 5`** native workers
+     (lightweight `swarm` or single-shot `invoke_subagent`). Native-first, no
+     auto-Magpie, no Hydrogen UI coding, and public-push security redlines still
+     apply unconditionally.
+   - **Standard Tier (`5 <= N <= 50` main parallel scale, unlimited
+     cumulative):** standard orchestrated main parallel waves dispatch **5–50**
+     subagents (`50`/wave ceiling; prefer warm reuse via `@<name>` over
+     kill/respawn churn, and use `tasks: [...]` for sharded sweeps `<name>-1..k`).
+     Convergent fix/re-check sub-waves constrained by an exclusive single-writer
+     lease, UI Mode A (where Carbon's `2–10` helpers count toward total scale),
+     and `>= 3`-way `web-research` (mandatory native `swarm`
+     `gemini-4-hydrogen-medium` + `tasks: [...]`, reusing active or new board)
+     dispatch per their actual leases.
+2. **Light → Standard escalation gate (anti-abuse):** NEVER stay in Light Tier
+   when a task involves **`>= 2` independent modules/subsystems**, whole-repo or
+   multi-category audit, multi-hypothesis debugging, UI visual + engineering
+   overhaul, substantial Skill refactoring (or core routing/gating rule edits),
+   workspace cleanup, or public GitHub push—escalate immediately to **Standard
+   Tier (`5 <= N <= 50`)** (`>= 3`-way `web-research` always enters native
+   `swarm` directly).
+3. **Primary is a pure dispatcher (Standard Tier):** in Standard Tier tasks,
+   Primary MUST NOT bulk-read large project files, perform bulk code edits, run
+   log forensics, or execute multi-file inspections (keeping only Light Tier
+   `N = 0` ultra-simple tasks, lightweight rule/shared-interface header reads,
+   final acceptance diff/receipt checks, pure single-step Q&A, live desktop/DAW
+   ops, or Rule 1 native-quota-0%/route-error fallback). Primary owns framing,
+   decomposition, frozen interfaces/write leases, escalations, and integration.
+4. **Same-category multi-spawn (encouraged):** spawn multiple workers **within
    the same category** whenever scope benefits from parallel depth or sharding:
    - `>= 2` independent read-only reviewers per core change/refactor/release;
    - directory- or module-sharded file/codebase readers;
    - 1 dedicated read-only worker per live debugging hypothesis;
    - concurrent disjoint writers across non-overlapping files/modules.
-4. **Direct peer handoffs:** provide peer names in briefs so adjacent owners
+5. **Direct peer handoffs:** provide peer names in briefs so adjacent owners
    exchange findings, specs, and reviewer↔author fixes directly on the board via
    `@<peer>` + `#seq`. Only changes to frozen interfaces or write leases
    escalate to `@coordinator`.
