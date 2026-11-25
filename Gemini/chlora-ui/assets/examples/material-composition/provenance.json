@@ -1,0 +1,99 @@
+{
+  "kind": "labelled teaching demonstration, not cold-start transfer or production repair",
+  "installed_candidate": "material-composition-lab-v2.13 repair1 exact9runtime/resourcefiles",
+  "author": "/root/ui_scope_inventory",
+  "independent_reviewer": "/root/skill_guide_audit",
+  "task_root": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103",
+  "source_skill_root": "$HOME/Projects/mc-patcher/.agents/skills/chlora-ui",
+  "current_product_exception": "FILTER-THEME-OBS-01:two independently reviewed actual filter-row clients; other current conditions/native not claimed",
+  "exact_rule_authority": [
+    "references/components.md",
+    "references/motion.md"
+  ],
+  "norm_changes": false,
+  "new_laboratory_adaptation": "Local pseudo-element property composition preserves selection500ms and existing theme-material/foreground owners; deliberate24percent left press is not established product history. Right command inherits exact final product patch.",
+  "evidence_versions": {
+    "original20_author_checks": "Original presentation bytes archived;not rebound or rerun on repair1.",
+    "original_finaldisplay3checks": "Original final HTML/JS display-only delta exactdiff;not rebound or rerun on repair1.",
+    "original_independent6interactions": "Original finalcandidate bytes;materialteachability accepted bounded, nestedcount-history alias failed.",
+    "repair1": "Only lab.js nestedcounts snapshot changed. Original failure reproduced red, repair targeted independently accepted15checks;actual16responsebody/16tracefulfill/42trusted470rAF10PNG across original+repair. Not fullsuite latestJS claim."
+  },
+  "original_issue": "MAT-COMP-REVIEW-01 retained;targeted repair independently accepted",
+  "reviews": [
+    {
+      "path": "reviews/material-composition-lab-v2.13/receipt.json",
+      "sha256": "5ef14b691d6a6f0b991bd7bd5b3ec2dafbf25a245605171055d78163a0da0717"
+    },
+    {
+      "path": "reviews/material-composition-lab-v2.13-repair1/receipt.json",
+      "sha256": "563bf316f6784ccfe68d20ac3958155f369ddda4577f96f37f273e772339dd98"
+    },
+    {
+      "path": "reviews/filter-theme-composition-current/receipt.json",
+      "sha256": "5e3dc5d7abd6d5b033cc4a10c97a18632c84afe32bcaff93dd047c76a1f96e66"
+    }
+  ],
+  "author_receipts": [
+    {
+      "path": "exercises/material-composition-lab-v2.13/receipt.json",
+      "sha256": "88c629b882aa6b4a4df26a2f1c444205d8988171de7fc0c5d78a8dca9a05cd9a"
+    },
+    {
+      "path": "exercises/material-composition-lab-v2.13/repair1/receipt.json",
+      "sha256": "926bbc64af7399c1d53d31b11e018b181002d22f0bbfb4e40b766bb35e724d21"
+    }
+  ],
+  "runtime_files": [
+    {
+      "relative": "index.html",
+      "sha256": "9c062c42a841e87cd69ce7c1e3839fb7df5a7a0f2d72143f65fd182afb94ebd1",
+      "bytes": 4840
+    },
+    {
+      "relative": "lab.css",
+      "sha256": "0a3817214dbbba3486fa430c28caf195f17bce0a53162a2f6bf0aaa829088626",
+      "bytes": 4842
+    },
+    {
+      "relative": "lab.js",
+      "sha256": "2baf2b5d408da6161a3becacff8b76ccd19684433089f17451d6892f33efed7f",
+      "bytes": 4238
+    },
+    {
+      "relative": "vendor/fonts/OFL-Charm.txt",
+      "sha256": "41423e9e1d0ea79d0e78bd5fe9e0b27f4c23140706f5dfbfe116839c83aae91c",
+      "bytes": 4383
+    },
+    {
+      "relative": "vendor/fonts/charm-bold.woff2",
+      "sha256": "24c162a2f25324e14d5ad7a87ff364e9988a6f7684eeaa0cbae055aae54ed297",
+      "bytes": 20480
+    },
+    {
+      "relative": "vendor/fonts/charm.woff2",
+      "sha256": "7e4614098c047b30156b75963f83ed6c797926854c3f7ef418f131cbbdb9603e",
+      "bytes": 20012
+    },
+    {
+      "relative": "vendor/host-dark-themes.css",
+      "sha256": "fca05b52b5c614e71f1b9e5fc25dc8f2fce86ad940f80e10fc13651d5689a642",
+      "bytes": 70051
+    },
+    {
+      "relative": "vendor/host-surface.css",
+      "sha256": "1acf523ff1bed1186d2ad9cb431a718b68a5155421eae379e1fd700ca6f36192",
+      "bytes": 243723
+    },
+    {
+      "relative": "vendor/host-theme.js",
+      "sha256": "23068306a2e0fbf4c6ad4a164c818af4c95e140e08d9817f539642ee966e3f11",
+      "bytes": 7001
+    }
+  ],
+  "limits": [
+    "No audio/Host/native/DAW/device/production control or real bridge.",
+    "NaturalTab/CJK fallback identity/OSAX and fullthemeCartesian not accepted.",
+    "Computed rAF and original screenshots not compositorFPS/native smoothness.",
+    "Original theme-owner182frame/five-scenario evidence belongs only to that separate old example."
+  ]
+}

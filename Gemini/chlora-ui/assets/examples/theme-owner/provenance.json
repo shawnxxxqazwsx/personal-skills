@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "installed_at_utc": "2026-11-02T18:39:47.573248+00:00",
+  "purpose": "Educational paired mode-switch counterexample, not a general plugin or full theme acceptance page",
+  "author_source": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103/exercises/theme-owner-lab-v2",
+  "independent_review": {
+    "path": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103/reviews/theme-owner-lab-v2/review.json",
+    "sha256": "76d0789f5a94b0518fc3c5cb8e6fd9b6c2b0fbf0f30b727d50f089d7a75a4113",
+    "verdict": "accepted-for-labelled-mode-choreography-with-limits",
+    "actual_source_bytes_verified": true,
+    "scenarios": 5,
+    "raf_samples": 182,
+    "author_self_tests_used": false
+  },
+  "production_owner": {
+    "source": "$HOME/Projects/mc-patcher/apps/host/ui/host-theme.js",
+    "sha256": "23068306a2e0fbf4c6ad4a164c818af4c95e140e08d9817f539642ee966e3f11",
+    "installed_copy": "host-theme.js",
+    "api": "ChloraTheme.apply"
+  },
+  "runtime_bytes_equal": {
+    "lab.css": "351973a3cb9c299522ae1414c296f403edc4bbf2dd42d3d2c66035ffa4118fd6",
+    "panel.css": "4d0b85d7fede1d1b5b93fe53d0ccc33514a7c3a9f1b92e77f322cafb740d5ecd",
+    "lab.js": "be77bd015de6a4b0e6aaf3e064a9380d10eaeac527502ef8cb019e8a4888cd2c",
+    "motion-adapter.js": "01670631342f8e9f10beb7c1143cb8fed04e5420bd559cba773c063d1e8aa7a9",
+    "frame-diagnostics.js": "b83d4ab32d6d210c3bd9bc0bed026cdf6bdf115ae00292b2069ebae5f45b5a5d",
+    "host-theme.js": "23068306a2e0fbf4c6ad4a164c818af4c95e140e08d9817f539642ee966e3f11",
+    "bad-owner.js": "00350c36edde6b2221e5a091b95c5029b098857c3955f96638179ff0c244fd38"
+  },
+  "adaptation": {
+    "original": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103/exercises/theme-owner-lab-v2/provenance.json",
+    "material": "Small panel.css adaptation; not complete shipping cascade",
+    "motion": "Exact-query iframe matchMedia override for local Normal/Reduced buttons; no OS preference mutation",
+    "index": "Only reviewer scope and relative navigation text changed; runtime files unchanged"
+  },
+  "unverified": [
+    "native/Host/DAW/audio/compositor smoothness",
+    "other palettes/states/interaction combinations"
+  ],
+  "candidate_observation": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103/reviews/theme-owner-lab-v2/candidate-observation.json",
+  "full_shipping_followup": {
+    "receipt": "$HOME/Projects/mc-patcher/output/chlora-ui-guide-20261103/audits/theme-palette-current/receipt.json",
+    "sha256": "c5da0d94990ae8101d761a5306d3a7c43ffec9b12a47895f941b7da4d6ab284a",
+    "result": "Active-palette fixed-endpoint discontinuity reproduced on five visible idle mature controls via actual frontend readback callbacks; native/compositor untested"
+  }
+}

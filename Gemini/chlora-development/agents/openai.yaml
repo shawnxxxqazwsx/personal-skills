@@ -1,0 +1,6 @@
+interface:
+  display_name: "Chlora Development"
+  short_description: "Build, organize, and verify Chlora on macOS and Windows"
+  default_prompt: "Use $chlora-development to implement, organize, and verify this change in the Chlora repository."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Pigora EQ"
+  short_description: "Fit, validate, and audit Pigora hardware-EQ modules"
+  default_prompt: "Use $pigora-eq to fit, validate, or audit this Pigora EQ module against frozen targets, smoothness, automation, and realtime gates."
+
+policy:
+  allow_implicit_invocation: true

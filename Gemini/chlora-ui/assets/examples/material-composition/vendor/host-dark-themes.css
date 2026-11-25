@@ -1,0 +1,1251 @@
+/* Canvas and surrounding Graph/Strip panels share the approved #1a1a1a base.
+   Raised controls retain their own contrast; semantic accents remain Chlora.
+
+   Chlora dark materials. Load after host-surface.css or host-shell.css.
+   The root attribute is shared by the shell and work surface. Geometry and
+   type tokens deliberately remain owned by the base stylesheets. */
+
+:root[data-theme="dark"]:is(:not([data-dark-palette]), [data-dark-palette="graphite"]) {
+  --dark-bg: #1a1a1a;
+  --dark-panel: #1a1a1a;
+  --dark-raised: #3d3d3d;
+  --dark-well: #1d1d1d;
+  --dark-border: #545454;
+  --dark-border-strong: #727272;
+  --dark-text: #c5bfb5;
+  --dark-dim: #98938b;
+  --dark-muted: #7f7a73;
+  --dark-accent: #c5bfb5;
+  --dark-accent-quiet: #938e84;
+  --dark-control: #c5bfb5;
+  --dark-selected: #3d3d3d;
+  --dark-header: #1a1a1a;
+  --dark-shadow: #000000b8;
+  --dark-in: #3c759b;
+  --dark-node-in: #284960;
+  --dark-out: #985968;
+  --dark-node-out: #5e3841;
+  --dark-node-pin: #5f383c;
+  --dark-snake: #484723;
+  --dark-merge: #493e5e;
+  --dark-fanout: #204f43;
+  /* Strip processing accents retain their existing material independently
+     of Graph node identity colours. */
+  --dark-strip-process: #7f2c6c;
+  --dark-router: #916436;
+  --dark-node-router: #593f24;
+  --dark-stack: #294860;
+  --dark-channel: #2d4e37;
+  --dark-wire: #899aa3;
+  --dark-wire-under: #0b1013;
+  --dark-meter-low: #668f87;
+  --dark-meter-mid: #8fac87;
+  --dark-meter-high: #c1ae77;
+  --dark-meter-clip: #dd927e;
+  --dark-ok: #80b19b;
+  --dark-warn: #d4ae74;
+  --dark-bad: #d48985;
+}
+
+:root[data-theme="dark"][data-dark-palette="slate"] {
+  --dark-bg: #1a1a1a;
+  --dark-panel: #1a1a1a;
+  --dark-raised: #3d3d3d;
+  --dark-well: #1d1d1d;
+  --dark-border: #545454;
+  --dark-border-strong: #727272;
+  --dark-text: #c0ccd4;
+  --dark-dim: #98a1a8;
+  --dark-muted: #73808a;
+  --dark-accent: #6b89a4;
+  --dark-accent-quiet: #50667c;
+  --dark-control: #c0ccd4;
+  --dark-selected: #3d3d3d;
+  --dark-header: #1a1a1a;
+  --dark-shadow: #000000b8;
+  --dark-in: #536f7b;
+  --dark-node-in: #254b5a;
+  --dark-out: #826876;
+  --dark-node-out: #583a4b;
+  --dark-node-pin: #5d3a3d;
+  --dark-snake: #474727;
+  --dark-merge: #4e3d58;
+  --dark-fanout: #1f4d4f;
+  --dark-strip-process: #784b6d;
+  --dark-router: #765e50;
+  --dark-node-router: #5b3d2c;
+  --dark-stack: #2c485e;
+  --dark-channel: #2e4d3a;
+  --dark-wire: #9aafbf;
+  --dark-wire-under: #0a131a;
+  --dark-meter-low: #639998;
+  --dark-meter-mid: #84b2a6;
+  --dark-meter-high: #c1b780;
+  --dark-meter-clip: #db9885;
+  --dark-ok: #8cbcab;
+  --dark-warn: #d6b47b;
+  --dark-bad: #df918d;
+}
+
+:root[data-theme="dark"][data-dark-palette="carbon"] {
+  --dark-bg: #1a1a1a;
+  --dark-panel: #1a1a1a;
+  --dark-raised: #3d3d3d;
+  --dark-well: #1d1d1d;
+  --dark-border: #545454;
+  --dark-border-strong: #727272;
+  --dark-text: #bbc9c3;
+  --dark-dim: #909b96;
+  --dark-muted: #6e7d76;
+  --dark-accent: #658c82;
+  --dark-accent-quiet: #425f57;
+  --dark-control: #bbc9c3;
+  --dark-selected: #3d3d3d;
+  --dark-header: #1a1a1a;
+  --dark-shadow: #000000b8;
+  --dark-in: #536f7b;
+  --dark-node-in: #294a58;
+  --dark-out: #826876;
+  --dark-node-out: #573b4b;
+  --dark-node-pin: #5b3b3e;
+  --dark-snake: #47472a;
+  --dark-merge: #4d3e56;
+  --dark-fanout: #254c4e;
+  --dark-strip-process: #784b6d;
+  --dark-router: #765e50;
+  --dark-node-router: #593e2e;
+  --dark-stack: #2f485b;
+  --dark-channel: #314c3b;
+  --dark-wire: #85aba6;
+  --dark-wire-under: #050b0a;
+  --dark-meter-low: #5f9a88;
+  --dark-meter-mid: #8db5a0;
+  --dark-meter-high: #b8b887;
+  --dark-meter-clip: #d8917f;
+  --dark-ok: #88bca6;
+  --dark-warn: #d2b37e;
+  --dark-bad: #d58b87;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  /* Shared shell + surface roles. */
+  --bg: var(--dark-bg);
+  --panel: var(--dark-panel);
+  --panel-hi: var(--dark-raised);
+  --sunken: var(--dark-well);
+  --hover: var(--dark-raised);
+  --border: var(--dark-border);
+  --border-strong: var(--dark-border-strong);
+  --text: var(--dark-text);
+  --text-dim: var(--dark-dim);
+  --text-mute: var(--dark-muted);
+  --accent: var(--dark-accent);
+  --accent-dim: var(--dark-accent-quiet);
+  --selected: var(--dark-selected);
+  --favorite: var(--dark-warn);
+  --ok: var(--dark-ok);
+  --warn: var(--dark-warn);
+  --bad: var(--dark-bad);
+  /* Work-surface chrome. */
+  --plate: var(--dark-panel);
+  --plate-hi: var(--dark-panel);
+  --ink: var(--dark-text);
+  --dim: var(--dark-dim);
+  --mute: var(--dark-muted);
+  --wine: var(--dark-accent);
+  --wine-soft: var(--dark-accent-quiet);
+  --sage: var(--dark-ok);
+  --forest: var(--dark-accent-quiet);
+  --route-fader-rail: var(--dark-border-strong);
+  --route-fader-thumb: var(--dark-control);
+  --route-fader-thumb-edge: var(--dark-border-strong);
+  --amber: var(--dark-warn);
+  --coral: var(--dark-bad);
+  --state-solo: var(--dark-warn);
+  --state-solo-edge: #4d3921;
+  --state-solo-label: #171a1b;
+  --state-mute: var(--dark-bad);
+  --state-mute-edge: #51302f;
+  --state-mute-label: #151819;
+  --blue: var(--dark-raised);
+  --violet: var(--dark-raised);
+  --green: var(--dark-raised);
+  --terracotta: var(--dark-raised);
+  --egg-hi: var(--dark-raised);
+  --egg-mid: var(--dark-panel);
+  --egg-lo: var(--dark-well);
+  --flat-fill: var(--dark-panel);
+  --flat-fill-2: var(--dark-raised);
+  --flat-border: var(--dark-border);
+  --ctl-border: 1px solid var(--dark-border);
+  --ctl-fill: var(--dark-raised);
+  --ctl-outline-fill: transparent;
+  --ctl-fill-hover: color-mix(in srgb, var(--dark-raised) 74%, var(--dark-text));
+  --ctl-fill-on: var(--dark-selected);
+  --menu-active-fill: var(--ctl-fill-hover);
+  --rail-fill: var(--dark-well);
+  --rail-idle: var(--dark-well);
+  --strip-rule: var(--dark-border);
+  /* Meter color communicates level, separate from selection/focus. */
+  --meter-lo: var(--dark-meter-low);
+  --meter-mid: var(--dark-meter-mid);
+  --meter-hi: var(--dark-meter-high);
+  --meter-clip: var(--dark-meter-clip);
+  /* Graph roles. Built-in identities retain their distinct hue families. */
+  --graph-node-io-surface: var(--dark-raised);
+  --graph-node-output-surface: var(--dark-raised);
+  --graph-node-surface: var(--dark-raised);
+  --graph-node-surface-raised: var(--dark-raised);
+  --graph-node-input-surface: var(--dark-raised);
+  /* Node fills use OKLCH L 39%, C .045–.055, retaining each category hue.
+     Dedicated I/O and Router roles leave Strip routing materials independent. */
+  --graph-node-input-header: var(--dark-node-in);
+  --graph-node-output-header: var(--dark-node-out);
+  --graph-node-builtin-snake: var(--dark-snake);
+  --graph-node-builtin-sum: var(--dark-merge);
+  --graph-node-builtin-fanout: var(--dark-fanout);
+  --graph-node-builtin-router: var(--dark-node-router);
+  --graph-node-builtin-stack: var(--dark-stack);
+  --graph-node-builtin-channel: var(--dark-channel);
+  --graph-node-builtin-pin: var(--dark-node-pin);
+  --graph-node-builtin-output-snake-mid: var(--dark-node-router);
+  --graph-node-builtin-snake-input-mid: var(--dark-fanout);
+  --graph-fanout-edge: color-mix(in srgb, var(--dark-fanout) 70%, black);
+  --graph-fanout-divider: color-mix(in srgb, var(--dark-fanout) 35%, var(--dark-text));
+  --graph-node-border: var(--dark-border);
+  --graph-node-ink: var(--dark-text);
+  --graph-node-dim: var(--dark-dim);
+  --graph-annotation-surface: var(--dark-panel);
+  --graph-annotation-raised: var(--dark-raised);
+  --graph-annotation-border: var(--dark-border-strong);
+  --graph-annotation-ink: var(--dark-text);
+  --graph-annotation-dim: var(--dark-dim);
+  --graph-fanout-text: var(--dark-text);
+  --graph-snake-copy: var(--dark-text);
+}
+
+/* Dark material overrides for legacy literal cream/brown paint. */
+:root[data-theme="dark"] .header {
+  background: var(--dark-panel);
+  box-shadow: 0 5px 14px var(--dark-shadow), inset 0 1px 0 #ffffff12;
+}
+:root[data-theme="dark"] .modes,
+:root[data-theme="dark"] .submodes {
+  box-shadow: inset 0 1px 2px #0008;
+}
+:root[data-theme="dark"] .btn.bypass.on {
+  background: var(--dark-well);
+  box-shadow: inset 0 0 0 1px var(--dark-border-strong);
+}
+:root[data-theme="dark"] .ctx-menu,
+:root[data-theme="dark"] .ctx-submenu,
+:root[data-theme="dark"] .ctx-dialog,
+:root[data-theme="dark"] .instance-menu {
+  background: var(--dark-raised);
+  color: var(--dark-text);
+  box-shadow: 0 8px 24px var(--dark-shadow), inset 0 0 0 1px var(--dark-border);
+}
+:root[data-theme="dark"] .ctx-menu .sep { background: var(--dark-border); }
+:root[data-theme="dark"] .ctx-dialog :is(input, select) {
+  background: var(--dark-well);
+  color: var(--dark-text);
+  caret-color: var(--dark-text);
+  box-shadow: inset 0 0 0 1px var(--dark-border-strong);
+}
+:root[data-theme="dark"] .ctx-dialog :is(input, select):focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--dark-accent);
+}
+:root[data-theme="dark"] .ctx-dialog input::selection {
+  background: var(--dark-accent);
+  color: var(--dark-well);
+}
+:root[data-theme="dark"] .ctx-dialog .ctx-actions button { background: var(--dark-panel); }
+:root[data-theme="dark"] .drag-ghost {
+  background: var(--dark-raised);
+  color: var(--dark-text);
+  box-shadow: 0 6px 18px var(--dark-shadow);
+}
+:root[data-theme="dark"] .plugin-group-label:hover { background: var(--dark-raised); }
+:root[data-theme="dark"] .insert-col.selected {
+  background: transparent;
+  box-shadow: none;
+}
+:root[data-theme="dark"] .insert-add {
+  border-color: var(--dark-border-strong);
+  background: var(--dark-panel);
+}
+:root[data-theme="dark"] .channel.selected {
+  background-color: transparent;
+  box-shadow: none;
+}
+:root[data-theme="dark"] :is(.meter-track, .meter-card.out .meter-track,
+  .graph-io-input-meters .meter-track, .graph-output-meters .meter-track,
+  .route-master-meter-track) {
+  background: var(--dark-well);
+}
+:root[data-theme="dark"] .channel-well::before { background: var(--dark-well); }
+:root[data-theme="dark"] .channel-rail { background: var(--dark-well); }
+:root[data-theme="dark"] .channel-thumb::after { background: var(--dark-border-strong); }
+:root[data-theme="dark"] .route-fader-bed { background: var(--dark-well); }
+:root[data-theme="dark"] .graph-view .graph-toolbar {
+  box-shadow: inset 0 -1px 0 var(--dark-border) !important;
+}
+:root[data-theme="dark"] .graph-view .graph-toolbar .graph-zoom-chrome button:hover {
+  background: var(--dark-raised) !important;
+  background-color: var(--dark-raised) !important;
+}
+:root[data-theme="dark"] .graph-view .graph-toolbar .graph-zoom-chrome button:active {
+  background: var(--dark-selected) !important;
+  background-color: var(--dark-selected) !important;
+}
+:root[data-theme="dark"] .graph-wires path.wire-under,
+:root[data-theme="dark"] .graph-wires path.preview.wire-under {
+  stroke: var(--dark-wire-under);
+}
+:root[data-theme="dark"] .graph-wires path.wire-over,
+:root[data-theme="dark"] .graph-wires path.preview.wire-over {
+  stroke: var(--dark-wire);
+}
+:root[data-theme="dark"] .graph-wires path.wire-under.selected,
+:root[data-theme="dark"] .graph-wires path.wire-under.insert-target {
+  stroke: color-mix(in srgb, var(--dark-accent) 40%, var(--dark-wire-under));
+}
+:root[data-theme="dark"] .graph-wires path.wire-over.selected,
+:root[data-theme="dark"] .graph-wires path.wire-over.insert-target {
+  stroke: var(--dark-accent);
+}
+:root[data-theme="dark"] .graph-cable-pin {
+  fill: var(--graph-node-builtin-pin);
+  stroke: color-mix(in srgb, var(--graph-node-builtin-pin) 52%, var(--dark-text));
+}
+:root[data-theme="dark"] .graph-cable-pin:is(:hover, .selected) {
+  fill: color-mix(in srgb, var(--graph-node-builtin-pin) 65%, var(--dark-text));
+  stroke: var(--dark-text);
+}
+:root[data-theme="dark"] .graph-insert-hint {
+  color: var(--dark-well);
+  background: var(--dark-accent);
+  box-shadow: 0 4px 12px var(--dark-shadow);
+}
+:root[data-theme="dark"] .graph-node.graph-builtin-node {
+  --graph-node-ink: var(--dark-text);
+  --graph-node-dim: var(--dark-dim);
+}
+:root[data-theme="dark"] .graph-node.graph-io-node.graph-builtin-node {
+  --graph-node-ink: var(--dark-text);
+  --graph-node-dim: var(--dark-dim);
+}
+:root[data-theme="dark"] .graph-node.graph-io-node .graph-node-hd,
+:root[data-theme="dark"] .graph-node:not(.graph-io-node) .graph-node-label {
+  color: var(--dark-text);
+}
+:root[data-theme="dark"] [data-graph-snake-wrap] {
+  color: var(--dark-text);
+  background: color-mix(in srgb, var(--dark-well) 55%, transparent);
+  border-color: color-mix(in srgb, var(--dark-text) 38%, transparent);
+}
+:root[data-theme="dark"] [data-graph-snake-wrap]:is(:hover, [aria-pressed="true"]) {
+  background: var(--dark-selected);
+  border-color: var(--dark-text);
+}
+:root[data-theme="dark"] .graph-pin:not(.bundle) {
+  box-shadow: 0 0 0 2px var(--dark-well);
+}
+:root[data-theme="dark"] .graph-node.is-router-compact-attachment {
+  --snake-label-ink: var(--dark-dim);
+  --snake-selection-ink: var(--dark-accent);
+}
+:root[data-theme="dark"] .graph-node.has-compact-io-snake .graph-io-snake-channels {
+  color: var(--dark-dim);
+}
+:root[data-theme="dark"] .graph-node.has-compact-io-snake.is-out .graph-io-snake-channels {
+  color: var(--dark-text);
+}
+:root[data-theme="dark"] .graph-router-matrix {
+  color: var(--dark-text);
+  background: var(--dark-raised);
+  border-color: var(--dark-border-strong);
+  box-shadow: 0 18px 44px var(--dark-shadow), inset 0 0 0 1px #ffffff10;
+}
+:root[data-theme="dark"] .graph-router-matrix-header {
+  border-bottom-color: var(--dark-border);
+}
+:root[data-theme="dark"] .graph-router-matrix-column button:hover,
+:root[data-theme="dark"] .graph-router-matrix-port:is(.selected, .drag-src, .drop-ok) {
+  border-color: var(--dark-text);
+  box-shadow: 0 0 0 2px var(--dark-accent), 0 0 0 4px var(--dark-well);
+}
+:root[data-theme="dark"] .graph-router-matrix-column button:focus-visible {
+  background: var(--dark-raised);
+  color: var(--dark-text);
+  box-shadow: none;
+}
+:root[data-theme="dark"] .graph-stack-controls,
+:root[data-theme="dark"] .graph-stack-macros,
+:root[data-theme="dark"] .graph-stack-header,
+:root[data-theme="dark"] .graph-node.is-stack-member {
+  --graph-node-ink: var(--dark-text);
+  color: var(--dark-text);
+}
+:root[data-theme="dark"] .graph-stack-macros .graph-parameter-knob .fill { stroke:var(--dark-text); }
+:root[data-theme="dark"] .graph-stack-controls.is-load-failed .graph-stack-plugin-name {
+  color: var(--dark-bad);
+}
+:root[data-theme="dark"] .graph-load-node {
+  color: var(--dark-dim);
+  background: var(--dark-raised);
+  box-shadow: inset 0 0 0 1px var(--dark-border-strong);
+}
+:root[data-theme="dark"] .graph-load-node[data-failed="1"] {
+  border-color: var(--dark-bad);
+}
+:root[data-theme="dark"] .graph-marquee {
+  border-color: var(--dark-accent);
+  background: color-mix(in srgb, var(--dark-accent) 12%, transparent);
+}
+:root[data-theme="dark"] .graph-marquee-count {
+  color: var(--dark-text);
+  background: var(--dark-raised);
+}
+:root[data-theme="dark"] .graph-parameter-config[aria-pressed="true"] {
+  color: var(--dark-well);
+  background: var(--dark-accent);
+}
+:root[data-theme="dark"] .reference-dialog {
+  color: var(--dark-text);
+  background: var(--dark-panel);
+  border-color: var(--dark-border-strong);
+  box-shadow: 0 18px 70px var(--dark-shadow);
+}
+:root[data-theme="dark"] .reference-dialog::backdrop { background: #0009; }
+:root[data-theme="dark"] :is(.reference-header, .reference-footer, .setting-row, .cheat-row) {
+  border-color: var(--dark-border);
+}
+:root[data-theme="dark"] :is(.reference-dialog select, .setting-row button,
+  .reference-search input, .font-picker-option) {
+  color: var(--dark-text);
+  background: var(--dark-raised);
+  border-color: var(--dark-border);
+}
+:root[data-theme="dark"] .reference-dialog button:hover {
+  background: var(--dark-selected);
+}
+:root[data-theme="dark"] .reference-dialog .font-picker-option.is-active {
+  background: var(--menu-active-fill);
+}
+:root[data-theme="dark"] .reference-dialog .font-picker-option:not(.is-active):hover {
+  background: var(--dark-raised);
+}
+:root[data-theme="dark"] .reference-body::-webkit-scrollbar-thumb {
+  background: var(--dark-border-strong);
+}
+:root[data-theme="dark"] .font-picker-list {
+  color: var(--dark-text);
+  background: var(--dark-raised);
+  border-color: var(--dark-border-strong);
+  box-shadow: 0 8px 28px var(--dark-shadow);
+}
+:root[data-theme="dark"] .setting-row .font-picker-trigger {
+  background: transparent; border: 0; box-shadow: none;
+}
+
+/* Canvas and surrounding chrome share the same continuous dark surface. */
+:root[data-theme="dark"] .graph-view,
+:root[data-theme="dark"] .graph-stage { background: var(--dark-bg); }
+
+/* Paint the type-colored perimeter above opaque titles without moving ports.
+   Interface hit containers have no card perimeter of their own. */
+:root[data-theme="dark"] .graph-node {
+  --graph-node-contour: color-mix(in srgb, var(--graph-node-label-color, var(--dark-node-out)) 76%, var(--dark-text));
+  --graph-node-border: var(--graph-node-contour);
+}
+:root[data-theme="dark"] .graph-node:not(.is-router-compact-attachment):not(.is-group-fanout),
+:root[data-theme="dark"] .graph-node.is-selected:not(.is-router-compact-attachment):not(.is-group-fanout) {
+  box-shadow: 0 2px 5px #0005;
+}
+:root[data-theme="dark"] .graph-node:not(.is-router-compact-attachment):not(.is-group-fanout)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 2px var(--graph-node-contour);
+  pointer-events: none;
+}
+:root[data-theme="dark"] .graph-node.is-router-compact-attachment.is-selected .graph-pin.bundle {
+  outline: none;
+  box-shadow: none;
+}
+:root[data-theme="dark"] .graph-group-frame.is-stack {
+  --graph-node-contour: color-mix(in srgb, var(--graph-node-builtin-stack) 76%, var(--dark-text));
+}
+:root[data-theme="dark"] .graph-group-frame.is-stack::after,
+:root[data-theme="dark"] .graph-group-frame.is-stack.is-selected::after {
+  border: 0;
+  box-shadow: inset 0 0 0 2px var(--graph-node-contour);
+}
+:root[data-theme="dark"] .graph-node.is-stack-port .graph-group-fanout-interface {
+  border-color: var(--graph-node-contour);
+  box-shadow: none;
+}
+:root[data-theme="dark"] .node-library-card.is-pin {
+  --node-library-color: var(--graph-node-builtin-pin);
+}
+:root[data-theme="dark"] .node-library-card.is-pin .node-library-label {
+  color: var(--dark-text);
+}
+:root[data-theme="dark"] .node-library-pin-body i {
+  border-color: var(--dark-dim);
+  background: color-mix(in srgb, var(--graph-node-builtin-pin) 72%, var(--dark-well));
+  box-shadow: none;
+}
+:root[data-theme="dark"] .graph-node.is-multi-linked {
+  outline-color: var(--graph-node-contour);
+}
+
+/* Approved unified dark Graph and Strip material. */
+
+
+:root[data-theme="dark"] :is(.node-library-card,.node-library-label,.node-library-body,.node-library-mini-label,.graph-snake-wrapped-node,.graph-node-label,.route-label,.routing .port) { color:var(--dark-text); }
+:root[data-theme="dark"] .node-library-empty { color:var(--dark-dim); }
+/* Console: neutral recessed work area, distinct input/output identities. */
+:root[data-theme="dark"] body:not(.surface-graph) :is(.routing,.insert-bay,.mixer,.meter-card) { background:var(--dark-bg); }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.topbar,.console-head,.mixer-head) { background:var(--dark-panel); }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.meter-card-label,.section-title,.route-label,.insert-title,.mixer-title,.channel-head,.master-label) { color:var(--dark-text); }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.meter-card-label,.insert-col,.insert-span-guide) { border-color:var(--dark-border); }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.insert-chip,.insert-load-chip) { background:var(--dark-raised); }
+/* Selection accents stay local; the signal controls keep their material contrast. */
+:root[data-theme="dark"] body:not(.surface-graph) .insert-chip.selected {
+  background: var(--dark-raised);
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--dark-accent) 65%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+:root[data-theme="dark"] body:not(.surface-graph) .insert-chip.bypassed { opacity:.65; }
+:root[data-theme="dark"] body:not(.surface-graph) .channel.selected { background:transparent; box-shadow:none; }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.channel-head,.insert-col-cap) { border-radius:3px; }
+:root[data-theme="dark"] body:not(.surface-graph) .channel.selected .channel-head,
+:root[data-theme="dark"] body:not(.surface-graph) .insert-col.selected .insert-col-cap {
+  background-color: var(--dark-panel);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--dark-accent) 65%, transparent);
+  color: var(--dark-text);
+  font-weight: var(--fw-regular);
+}
+:root[data-theme="dark"] .plugin-row.selected {
+  background-color: color-mix(in srgb, var(--dark-bg) 90%, var(--dark-dim));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--dark-accent) 65%, transparent);
+}
+:root[data-theme="dark"] body:not(.surface-graph) .channel-thumb { background:var(--dark-text); border-color:#b8afa0; }
+:root[data-theme="dark"] body:not(.surface-graph) .channel-thumb::after { background:#5e5a53; }
+:root[data-theme="dark"] body:not(.surface-graph) .route-pocket-in { --wine:var(--dark-in); }
+:root[data-theme="dark"] body:not(.surface-graph) .route-pocket-master { --wine:var(--dark-out); }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.route-pocket-in,.route-pocket-master) .master-value { color:var(--dark-text); }
+
+:root[data-theme="dark"] :is(.route-gain-label,.route-pocket .master-value) { text-shadow:none; }
+:root[data-theme="dark"] .route-master-meter-shell { fill:var(--dark-panel); stroke:var(--dark-border); }
+:root[data-theme="dark"] .route-master-meter-track { fill:var(--dark-well); stroke:var(--dark-border); }
+:root[data-theme="dark"] .channel-unity { background:var(--dark-border-strong); }
+:root[data-theme="dark"] .route-band.input { --port-accent:var(--dark-in); }
+:root[data-theme="dark"] .route-band.process { --port-accent:var(--dark-strip-process); }
+:root[data-theme="dark"] .route-band.output { --port-accent:var(--dark-out); }
+:root[data-theme="dark"] .routing .port { background:var(--port-accent,var(--dark-router)); border-color:color-mix(in srgb,var(--port-accent,var(--dark-router)) 70%,var(--dark-text)); color:var(--dark-text); }
+:root[data-theme="dark"] .routing .port.on-path:not(.selected):not(.drag-src):not(.drop-ok) { background:var(--port-accent,var(--dark-router)); border-color:var(--port-accent,var(--dark-router)); color:var(--dark-text); }
+:root[data-theme="dark"] .routing .port:is(.selected,.drag-src,.drop-ok) { background:var(--dark-raised); border-color:var(--dark-text); box-shadow:0 0 0 2px var(--port-accent,var(--dark-router)); }
+:root[data-theme="dark"] .route-wires path.core { stroke:var(--dark-wire); }
+:root[data-theme="dark"] .route-wires path.under { stroke:var(--dark-bg); }
+
+/* Dark hierarchy: bright text takes the previous dim role; dim and muted
+   text share its luminance attenuation. Controls retain the previous dim level. */
+
+:root[data-theme="dark"] .topbar {
+  --dim: var(--dark-text);
+  --sage: var(--dark-text);
+}
+:root[data-theme="dark"] :is(.instance-toggle.live #instanceCurrent,.instance-caret,
+  .mode-group button,.filter-row button,.route-gain-label,.route-meter-mode) { color:var(--dark-text); }
+:root[data-theme="dark"] .route-meter-mode { text-shadow:none; }
+:root[data-theme="dark"] body:not(.surface-graph) {
+  --route-fader-thumb:var(--dark-control);
+  --route-fader-thumb-edge:var(--dark-control);
+  --meter-lo:var(--dark-control);
+  --meter-mid:var(--dark-control);
+  --meter-hi:var(--dark-control);
+  --meter-clip:var(--dark-control);
+  --meter-grad-h:linear-gradient(90deg,var(--dark-control),var(--dark-control));
+  --meter-grad-v:linear-gradient(0deg,var(--dark-control),var(--dark-control));
+}
+:root[data-theme="dark"] body:not(.surface-graph) .routing .port,
+:root[data-theme="dark"] body:not(.surface-graph) .routing .port.on-path:not(.selected):not(.drag-src):not(.drop-ok) {
+  background:var(--dark-control); border-color:var(--dark-control); color:var(--dark-bg); box-shadow:none;
+}
+:root[data-theme="dark"] body:not(.surface-graph) .routing .port:is(.selected,.drag-src,.drop-ok) {
+  background:var(--dark-control); border-color:var(--dark-control); color:var(--dark-bg);
+  box-shadow:0 0 0 2px var(--dark-bg),0 0 0 3px var(--dark-text);
+}
+:root[data-theme="dark"] body:not(.surface-graph) :is(.channel-thumb,.route-fader-thumb) {
+  background:var(--dark-control); border-color:var(--dark-control);
+}
+:root[data-theme="dark"] body:not(.surface-graph) .route-fader-cap-mark,
+:root[data-theme="dark"] body:not(.surface-graph) .channel-thumb::after { background:#5e5a53; }
+:root[data-theme="dark"] body:not(.surface-graph) :is(.meter-fill,.channel-meter) {
+  background-image:none; background-color:var(--dark-control);
+}
+:root[data-theme="dark"] body:not(.surface-graph) .route-master-meter-fill { fill:var(--dark-control); }
+:root[data-theme="dark"] body:not(.surface-graph) .insert-chip { border-left-color:var(--dark-text); }
+
+/* Strip idle tracks remain solid columns even with silent meters. Avoid
+   bright inset outlines against an almost invisible well fill. */
+:root[data-theme="dark"] body:not(.surface-graph) :is(.meter-card .meter-track,.channel-rail),
+:root[data-theme="dark"] body:not(.surface-graph) .channel-well::before {
+  background:var(--dark-raised);
+  box-shadow:none;
+}
+:root[data-theme="dark"] body:not(.surface-graph) .route-master-meter-track {
+  fill:var(--dark-raised);
+  stroke:none;
+}
+:root[data-theme="dark"] body:not(.surface-graph) .route-master-meter-shell {
+  fill:transparent;
+  stroke:none;
+}
+
+/* The moving outline owns selected chrome; each dark strip keeps its idle fill. */
+:root[data-theme="dark"] body.strip-selection-motion:not(.surface-graph) .channel.selected .channel-head,
+:root[data-theme="dark"] body.strip-selection-motion:not(.surface-graph) .insert-col.selected .insert-col-cap {
+  background-color:transparent; box-shadow:none;
+}
+:root[data-theme="dark"] body.strip-selection-motion:not(.surface-graph) .insert-chip.selected {
+  background:var(--dark-raised);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 12%,transparent);
+}
+
+/* Graph value paint shares the established meter/control and Clara wordmark
+   roles. Node identity surfaces and semantic mute/solo paint stay independent. */
+:root[data-theme="dark"] {
+  --graph-node-control: var(--dark-control);
+}
+:root[data-theme="dark"] .graph-node {
+  --graph-node-ink: var(--dark-text);
+}
+:root[data-theme="dark"] :is(.graph-node,.graph-stack-macros) .graph-parameter-knob .fill {
+  stroke: var(--graph-node-control);
+}
+:root[data-theme="dark"] :is(.graph-node,.graph-stack-macros) :is(.graph-parameter-name,.graph-parameter-value),
+:root[data-theme="dark"] .graph-node :is(small,.graph-channel-label,.graph-channel-delay-unit,.graph-io-gain-label),
+:root[data-theme="dark"] .graph-stack-header {
+  color: var(--dark-text);
+}
+:root[data-theme="dark"] .graph-node.graph-io-node .graph-io-fader .channel-thumb {
+  background: var(--graph-node-control);
+  border-color: var(--dark-border-strong);
+}
+:root[data-theme="dark"] .graph-node.graph-io-node .graph-io-fader .channel-thumb::after {
+  background: var(--dark-well);
+}
+:root[data-theme="dark"] .graph-node.graph-io-node :is(.graph-io-input-meters,.graph-output-meters) .meter-fill {
+  background-image: none;
+  background-color: var(--graph-node-control);
+}
+:root[data-theme="dark"] .graph-spatial-meter [data-spatial-channel]:not(.is-muted):not(.is-solo) > :is(.spatial-cell,.spatial-ball),
+:root[data-theme="dark"] .graph-spatial-meter .spatial-lfe-cap {
+  stroke: var(--graph-node-control);
+}
+
+:root[data-theme="dark"] .graph-node :is(.graph-sidechain-label,.graph-snake-sidecar strong),
+:root[data-theme="dark"] .graph-node.has-compact-io-snake .graph-io-snake-channels,
+:root[data-theme="dark"] .graph-router-matrix-header span,
+:root[data-theme="dark"] .graph-io-input-meters .meter-row > span:first-child {
+  color: var(--dark-text);
+}
+
+/* Centre the diffuse feedback on every edge of the complete card. */
+:root {
+  --graph-elevation-shadow:0 0 22px #201a2430,0 0 24px #201a243d,0 0 6px #201a2433;
+  --graph-elevation-selected-shadow:0 0 28px #201a243d,0 0 32px #201a2447,0 0 8px #201a243d;
+  --graph-elevation-socket-shadow:0 0 5px #201a2473;
+}
+:root[data-theme="dark"] {
+  --graph-elevation-socket-shadow:0 0 5px #000b;
+}
+:is(.graph-stage,.graph-preset-editor) :is(.graph-node,.graph-group-frame) {
+  --graph-elevation-color:var(--graph-node-label-color,var(--graph-group-colour,var(--graph-node-output-header)));
+  --graph-elevation-glow:color-mix(in srgb,var(--graph-elevation-color) 78%,#fff);
+  transition:z-index var(--graph-elevation-exit-duration,480ms) step-end;
+}
+:is(.graph-stage,.graph-preset-editor) .graph-node.is-ir-loader { --graph-elevation-color:var(--ir-ink); }
+:is(.graph-stage,.graph-preset-editor) .graph-node.is-lfo { --graph-elevation-color:var(--graph-modifier-ink); }
+:is(.graph-stage,.graph-preset-editor) .graph-group-frame.is-stack { --graph-elevation-color:var(--graph-node-builtin-stack); }
+:is(.graph-stage,.graph-preset-editor) .graph-node:is(:hover,.is-selected) { z-index:4; }
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node:not(.is-router-compact-attachment,.is-group-fanout),.graph-group-frame.is-stack),
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node:not(.is-router-compact-attachment,.is-group-fanout),.graph-group-frame.is-stack):is(:hover,.is-selected) {
+  box-shadow:none !important;
+  border-color:transparent;
+  outline:none;
+}
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node:not(.is-router-compact-attachment,.is-group-fanout),.graph-group-frame):is(:hover,.is-selected) {
+  transition-duration:0ms;
+}
+:is(.graph-stage,.graph-preset-editor) .graph-group-frame {
+  --graph-elevation-enter-duration:360ms;
+  --graph-elevation-exit-duration:600ms;
+}
+/* The Group's inset border stays on the frame; diffuse feedback has its own
+   layer so no hover transition swaps inset and outset shadow lists. */
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-group-frame:not(.is-stack),
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-group-frame:not(.is-stack):is(:hover,.is-selected) {
+  --graph-group-border-shadow:inset 0 0 0 1px color-mix(in oklab,var(--graph-group-colour) 40%,transparent);
+  box-shadow:var(--graph-group-border-shadow) !important;
+}
+/* Fade one prepainted layer in both themes. In particular a continuously
+   repainted Spectrogram canvas must not also animate the card's blur geometry.
+   Dark feedback is pure centred light, without a downward black shadow. */
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.graph-builtin-node,.graph-node):not(.is-router-compact-attachment,.is-group-fanout)::after,
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-group-frame::after {
+  content:""; position:absolute; inset:0; z-index:6;
+  border:0; border-radius:inherit; pointer-events:none;
+  box-shadow:var(--graph-elevation-shadow);
+  opacity:0; transition:opacity var(--graph-elevation-exit-duration,480ms) cubic-bezier(.2,.7,.2,1);
+}
+:root[data-theme="light"] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.graph-builtin-node,.graph-node):not(.is-router-compact-attachment,.is-group-fanout).is-selected::after,
+:root[data-theme="light"] :is(.graph-stage,.graph-preset-editor) .graph-group-frame.is-selected::after {
+  box-shadow:var(--graph-elevation-selected-shadow);
+}
+:root[data-theme="dark"] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.graph-builtin-node,.graph-node):not(.is-router-compact-attachment,.is-group-fanout)::after,
+:root[data-theme="dark"] :is(.graph-stage,.graph-preset-editor) .graph-group-frame::after {
+  box-shadow:0 0 12px 3px color-mix(in srgb,var(--graph-elevation-glow) 52%,transparent),
+    0 0 30px 7px color-mix(in srgb,var(--graph-elevation-glow) 32%,transparent);
+}
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.graph-builtin-node,.graph-node):not(.is-router-compact-attachment,.is-group-fanout):is(:hover,.is-selected)::after,
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-group-frame:is(:hover,.is-selected)::after {
+  opacity:1; transition-duration:var(--graph-elevation-enter-duration,140ms);
+}
+/* Edge sockets lift the painted jack, never their transparent hit container. */
+:is(.graph-stage,.graph-preset-editor) .graph-node:is(.is-router-compact-attachment,.is-group-fanout) :is(.graph-pin.bundle,.graph-group-fanout-interface) { transition:filter 480ms cubic-bezier(.2,.7,.2,1); }
+:is(.graph-stage,.graph-preset-editor) .graph-node:is(.is-router-compact-attachment,.is-group-fanout):is(:hover,.is-selected) :is(.graph-pin.bundle,.graph-group-fanout-interface) { filter:drop-shadow(var(--graph-elevation-socket-shadow)); transition-duration:140ms; }
+:root[data-theme="dark"] :is(.graph-stage,.graph-preset-editor) .graph-node:is(.is-router-compact-attachment,.is-group-fanout):is(:hover,.is-selected) :is(.graph-pin.bundle,.graph-group-fanout-interface) { filter:drop-shadow(var(--graph-elevation-socket-shadow)) drop-shadow(0 0 7px color-mix(in srgb,var(--graph-elevation-glow) 68%,transparent)) drop-shadow(0 0 16px color-mix(in srgb,var(--graph-elevation-glow) 42%,transparent)); }
+@media (prefers-reduced-motion:reduce) {
+  :is(.graph-stage,.graph-preset-editor) :is(.graph-node,.graph-group-frame),
+  :root[data-theme] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.graph-builtin-node,.graph-node):not(.is-router-compact-attachment,.is-group-fanout)::after,
+  :root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-group-frame::after,
+  :is(.graph-stage,.graph-preset-editor) .graph-node:is(.is-router-compact-attachment,.is-group-fanout) :is(.graph-pin.bundle,.graph-group-fanout-interface) { transition:none; }
+}
+
+/* Shared Graph control feedback: keep semantic on-colours and text-only editing. */
+:root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+  :is(button:not(.graph-pin):not(.graph-router-matrix button),input[inputmode="decimal"],.graph-io-value,.channel-db,.channel-db-edit,.graph-parameter-knob) {
+  transition:background-color var(--motion-material) var(--motion-material-easing),color 180ms ease,box-shadow var(--motion-material) var(--motion-material-easing),opacity 180ms ease,scale 140ms ease;
+}
+:root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+  :is(button:not(.graph-pin):not(.graph-router-matrix button),input[inputmode="decimal"],.graph-io-value,.channel-db,.channel-db-edit,.graph-parameter-knob):not(:disabled):hover {
+  box-shadow:0 2px 7px color-mix(in srgb,var(--graph-node-ink,var(--ink)) 16%,transparent);
+}
+:root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+  :is(button:not(.graph-pin):not(.graph-router-matrix button),input[inputmode="decimal"],.graph-io-value,.channel-db,.channel-db-edit,.graph-parameter-knob):not(:disabled,.on,[aria-pressed="true"],[aria-checked="true"],[aria-expanded="true"]):hover {
+  background-color:color-mix(in srgb,var(--graph-node-ink,var(--ink)) 7%,transparent);
+}
+:root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+  :is(input[inputmode="decimal"],.graph-io-value,.channel-db,.channel-db-edit,.graph-parameter-knob) { border-radius:5px; }
+:root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+  button:not(.graph-pin):not(.graph-router-matrix button):not(:disabled):active { scale:.96; }
+/* Keyboard material survives the neutral numeric reset and pointer hover.
+   Limit this to the controls whose former focus cue was a text underline. */
+:root[data-theme] .graph-stage #graphCanvas .graph-node
+  :is(.graph-sum-gain,.graph-io-value,.channel-db,.channel-db-edit,.graph-lfo-panel [data-lfo-field],.graph-lfo-range input):focus-visible {
+  background:color-mix(in srgb,var(--graph-node-ink,var(--ink)) 12%,transparent);
+  border-radius:3px;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node :is(.graph-sum-branch-controls,.meter-sm) button:focus-visible {
+  box-shadow:inset 0 0 0 2px color-mix(in srgb,currentColor 55%,transparent);
+}
+/* S/M uses a separate material edge; each mature control owns its state fade. */
+:root[data-theme] .graph-stage #graphCanvas .graph-node :is(.graph-sum-branch-controls,.meter-sm) button {
+  transition:box-shadow var(--motion-material) var(--motion-material-easing),
+    background-color var(--motion-theme-material) var(--motion-material-easing),
+    border-color var(--motion-theme-material) var(--motion-material-easing),opacity 180ms ease,scale 140ms ease;
+}
+/* Keep discrete socket faces above the card's glow overlay. */
+:root[data-theme] :is(.graph-stage,.graph-preset-editor) .graph-node .graph-pin:not(.bundle) { z-index:7; }
+/* Socket interaction states retain the same opaque face and rim. */
+:root[data-theme] .graph-stage .graph-pin:not(.bundle):is(.sel,.hot,.hot-selected) {
+  background:var(--graph-node-accent-mid);
+  border-color:var(--graph-node-accent-deep);
+  box-shadow:0 0 0 2px var(--graph-node-accent-pale);
+}
+:root[data-theme="dark"] .graph-stage .graph-pin:not(.bundle):is(.sel,.hot,.hot-selected) {
+  box-shadow:0 0 0 2px var(--dark-well);
+}
+.graph-cable-pin { transition:fill 180ms ease,stroke 180ms ease,stroke-width 180ms ease,filter 480ms cubic-bezier(.2,.7,.2,1); }
+.graph-cable-pin:is(:hover,.selected) { filter:drop-shadow(0 0 4px color-mix(in srgb,var(--wine) 38%,transparent)) drop-shadow(0 2px 3px #0003); transition-duration:180ms,180ms,180ms,140ms; }
+:root[data-theme="dark"] .graph-cable-pin:is(:hover,.selected) { filter:drop-shadow(0 0 5px color-mix(in srgb,var(--graph-node-builtin-pin) 65%,var(--dark-text))) drop-shadow(0 2px 3px #0006); }
+@media (prefers-reduced-motion:reduce) {
+  :root[data-theme] .graph-stage :is(.graph-node,.graph-group-frame.is-stack)
+    :is(button:not(.graph-pin):not(.graph-router-matrix button),input[inputmode="decimal"],.graph-io-value,.channel-db,.channel-db-edit,.graph-parameter-knob),
+  .graph-cable-pin,.graph-router-expand-icon,.graph-snake-wrap-icon { transition:none; }
+}
+
+/* Router editor: a single rounded surface, with a quiet output listening bank. */
+:root[data-theme] .graph-stage .graph-node.is-router.router-matrix-expanded { z-index:80; transition-property:box-shadow; }
+:root[data-theme] :is(#routing, .graph-stage .graph-router-matrix) {
+  --router-panel:#e9dfd2; --router-bank:#ddd1c1;
+  --router-ink:#453b35; --router-dim:#63574e; --router-route:#687c91;
+  --router-port-highlight:#50677e; --router-port-ink:#fff8f0;
+  --router-button:#c9bcab; --router-solo:#e5c36e; --router-mute:#cfa6a2;
+  --router-phase:#b6c8d7;
+}
+:root[data-theme] .graph-stage .graph-router-matrix {
+  --router-ball-padding:8px;
+  border:0; border-radius:16px; outline:none;
+  color:var(--router-ink); background:var(--router-panel);
+  box-shadow:0 22px 50px #201a2447,0 4px 14px #201a2438;
+  opacity:0; transition:transform 320ms cubic-bezier(.22,.61,.36,1);
+}
+:root[data-theme="dark"] :is(#routing, .graph-stage .graph-router-matrix) {
+  --router-panel:#292622; --router-bank:#35302b;
+  --router-ink:#f0e4d7; --router-dim:#b5a798; --router-route:#b1c4d7;
+  --router-port-highlight:var(--router-route); --router-port-ink:var(--router-panel);
+  --router-button:#484039; --router-solo:#c9a653; --router-mute:#75504d;
+  --router-phase:#4d6276;
+}
+:root[data-theme="dark"] .graph-stage .graph-router-matrix {
+  box-shadow:0 22px 50px #000a,0 0 24px #b49a7e32;
+}
+:root[data-theme] .graph-stage .graph-router-matrix.is-open { opacity:1; --graph-router-reveal-scale:1; }
+:root[data-theme] .graph-stage .graph-router-matrix:not(.is-open) { pointer-events:none; transition-property:opacity,transform; transition-duration:280ms; }
+:root[data-theme] .graph-stage .graph-router-matrix-header {
+  min-height:54px; padding:0 16px 0 22px; gap:12px;
+  border:0; background:var(--router-panel); color:var(--router-ink);
+}
+:root[data-theme] .graph-stage .graph-router-matrix-header strong {
+  font-size:var(--fs-ui); letter-spacing:0; font-weight:var(--fw-bold); color:var(--router-ink);
+}
+:root[data-theme] .graph-stage .graph-router-matrix-header span { color:var(--router-dim); letter-spacing:0; }
+:root[data-theme] .graph-stage .graph-router-matrix-header button {
+  min-width:30px; height:30px; border-radius:9px;
+  color:var(--router-ink); background:transparent; cursor:default;
+}
+:root[data-theme] .graph-stage .graph-router-matrix-header [data-graph-router-close] { font-size:21px; }
+:root[data-theme] .graph-stage .graph-router-matrix-scroll { height:min(var(--graph-router-content-h,420px),716px,calc(var(--graph-router-stage-h,100vh) - 70px)); }
+:root[data-theme] .graph-stage .graph-router-matrix-canvas { min-width:0; }
+/* Extend the scroll viewport into the cable field, keeping the original
+   264px channel geometry and room beyond each ball inside the viewport. */
+:root[data-theme] .graph-stage .graph-router-matrix-side-scroll.inputs { width:calc(264px + var(--router-ball-padding)); }
+:root[data-theme] .graph-stage .graph-router-matrix-side-scroll.outputs { width:calc(264px + var(--router-ball-padding)); background:transparent; }
+:root[data-theme] .graph-stage .graph-router-matrix-column { width:264px; margin-left:0; }
+:root[data-theme] .graph-stage .graph-router-matrix-column.outputs { margin-left:var(--router-ball-padding); }
+:root[data-theme] .graph-stage .graph-router-matrix-column > strong {
+  top:0; padding:16px 18px 10px; box-sizing:border-box;
+  text-align:left; color:var(--router-dim); background:var(--router-panel);
+}
+:root[data-theme] .graph-stage .graph-router-matrix-column.outputs > strong { background:var(--router-bank); }
+:root[data-theme] .graph-stage .graph-router-matrix-column.inputs .graph-router-matrix-port { left:calc(100% - 18px); }
+:root[data-theme] .graph-stage .graph-router-matrix-column.outputs .graph-router-matrix-port { left:18px; }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port {
+  cursor:default; border:0; background:var(--router-button); color:var(--router-ink); box-shadow:none;
+  transition:background-color var(--motion-material) var(--motion-material-easing),box-shadow var(--motion-material) var(--motion-material-easing);
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:focus-visible,.selected,.drag-src,.drop-ok) {
+  background:var(--router-port-highlight); color:var(--router-port-ink); text-decoration:none;
+  box-shadow:0 3px 9px #0003; outline:none;
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-core { stroke:var(--router-route); }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-under { stroke:var(--router-panel); }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-hit { cursor:default; }
+.graph-router-channel-label,.graph-router-channel-row {
+  position:absolute; transform:translateY(-50%); height:34px; display:flex; align-items:center;
+  font-size:var(--fs-micro); pointer-events:none;
+}
+.graph-router-channel-label.input { left:18px; right:42px; gap:12px; }
+.graph-router-channel-label span { color:var(--router-dim); font-variant-numeric:tabular-nums; }
+.graph-router-channel-label b { font-weight:var(--fw-regular); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.graph-router-channel-row {
+  left:calc(6px - var(--router-ball-padding)); right:10px;
+  padding-left:calc(32px + var(--router-ball-padding)); box-sizing:border-box;
+  justify-content:space-between; gap:8px;
+}
+.graph-router-channel-row .graph-router-channel-label { position:static; transform:none; min-width:0; flex:1; }
+.graph-router-channel-toggles { display:flex; gap:3px; pointer-events:auto; }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-channel-toggles button {
+  position:static; transform:none; width:28px; height:28px; padding:0;
+  border:0; border-radius:8px; outline:none; cursor:default;
+  color:var(--router-dim); background:transparent; font:inherit; font-weight:var(--fw-bold); line-height:28px;
+}
+:root[data-theme] .graph-stage .graph-router-matrix button:not(.graph-router-matrix-port,[aria-pressed="true"]):is(:hover,:focus-visible) {
+  background:color-mix(in srgb,var(--router-ink) 17%,var(--router-panel)); box-shadow:0 3px 9px #0004;
+  outline:none; text-decoration:none;
+}
+:root[data-theme] .graph-stage .graph-router-matrix [data-router-toggle="solo"][aria-pressed="true"] { color:#423719; background:var(--router-solo); }
+:root[data-theme] .graph-stage .graph-router-matrix [data-router-toggle="mute"][aria-pressed="true"] { color:var(--router-ink); background:var(--router-mute); }
+:root[data-theme] .graph-stage .graph-router-matrix [data-router-toggle="polarity"][aria-pressed="true"] { color:var(--router-ink); background:var(--router-phase); }
+:root[data-theme] .graph-stage .graph-router-matrix-side-scroll:focus-visible { box-shadow:none; }
+@media (prefers-reduced-motion:reduce) {
+  :root[data-theme] .graph-stage .graph-router-matrix,
+  :root[data-theme] .graph-stage .graph-router-matrix button { transition:none; }
+  :root[data-theme] .graph-stage .graph-router-matrix.is-open .graph-router-matrix-header { animation:none; }
+}
+
+/* Bank paint stays beneath wires; opaque endpoint chips stay above both. */
+:root[data-theme] .graph-stage .graph-router-matrix-canvas::before {
+  content:""; position:absolute; inset:0 0 0 auto;
+  width:calc(264px + var(--router-ball-padding));
+  z-index:0; pointer-events:none; background:var(--router-bank); border-radius:12px 0 0 0;
+}
+/* Let the highlight reach into the bank gutter while keeping channel numbers
+   aligned at 18px. The rounded left ink stays inside the scroll viewport. */
+.graph-router-channel-row.input {
+  left:6px; right:calc(6px - var(--router-ball-padding));
+  padding-left:12px; padding-right:calc(32px + var(--router-ball-padding));
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port { opacity:1; scale:1; }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:focus-visible,.selected,.drag-src,.drop-ok) {
+  background:var(--router-port-highlight); color:var(--router-port-ink); opacity:1;
+  box-shadow:0 0 10px color-mix(in srgb,var(--router-route) 55%,transparent),0 3px 7px #0004;
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-core.selected,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-preview {
+  stroke:var(--router-route); opacity:1; filter:drop-shadow(0 0 3px color-mix(in srgb,var(--router-route) 55%,transparent));
+}
+:root[data-theme] .graph-stage .graph-router-matrix [data-router-toggle][aria-pressed="true"]:is(:hover,:focus-visible) {
+  box-shadow:0 0 9px color-mix(in srgb,var(--router-ink) 20%,transparent),0 3px 7px #0004;
+}
+:is(.graph-stage,.graph-preset-editor) :is(.graph-node.is-router,.graph-node.is-bundle,.graph-node.is-fanout,.graph-node.is-sum,.graph-node.is-channel,.graph-group-frame.is-stack) {
+  --graph-elevation-glow:color-mix(in srgb,var(--graph-elevation-color) 56%,#fff);
+}
+:root[data-theme="dark"] :is(.graph-stage,.graph-preset-editor) :is(.graph-node.is-router,.graph-node.is-bundle,.graph-node.is-fanout,.graph-node.is-sum,.graph-node.is-channel,.graph-group-frame.is-stack)::after {
+  box-shadow:0 0 12px 3px color-mix(in srgb,var(--graph-elevation-glow) 68%,transparent),
+    0 0 30px 7px color-mix(in srgb,var(--graph-elevation-glow) 42%,transparent);
+}
+:root[data-theme] .graph-stage :is(.graph-node.is-router,.graph-node.is-bundle,.graph-node.is-fanout,.graph-node.is-sum,.graph-node.is-channel,.graph-group-frame.is-stack)
+  button:not(.graph-pin):not(.graph-router-matrix button):not(:disabled,[aria-pressed="true"],.on):hover {
+  background-color:color-mix(in srgb,var(--graph-node-ink,var(--ink)) 15%,transparent);
+  box-shadow:0 3px 9px color-mix(in srgb,var(--graph-node-ink,var(--ink)) 28%,transparent);
+}
+
+:root[data-theme] .graph-stage .graph-router-matrix button:not(.graph-router-matrix-port) { transition:background-color var(--motion-material) var(--motion-material-easing),color 180ms ease,box-shadow var(--motion-material) var(--motion-material-easing),scale 140ms ease; }
+:root[data-theme] .graph-stage .graph-router-matrix button:not(.graph-router-matrix-port):active { scale:.96; }
+@media (prefers-reduced-motion:reduce) { :root[data-theme] .graph-stage .graph-router-matrix button { transition:none; } }
+
+/* Shared ball feedback, independent materials: Strip keeps its ink green. */
+:root[data-theme] .graph-stage .graph-router-matrix {
+  --patchbay-accent:var(--router-route); --patchbay-fill:var(--router-port-highlight);
+  --patchbay-ink:var(--router-port-ink); --patchbay-panel:var(--router-panel);
+}
+:root[data-theme] #routing {
+  --patchbay-accent:#397366; --patchbay-fill:#397366;
+  --patchbay-ink:#fff8f0;
+}
+:root[data-theme] #routing .port {
+  border:0; background:#3f5548; color:#fff8f0; box-shadow:none;
+  text-decoration:none;
+}
+:root[data-theme] #routing .port,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port {
+  /* Selection ink commits immediately; only light and size ease into place. */
+  transition:box-shadow var(--motion-material) var(--motion-material-easing),
+    scale var(--motion-feedback) var(--motion-out);
+}
+:root[data-theme] #routing .port:is(:hover,:focus-visible,.selected,.drag-src,.drop-ok),
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:focus-visible,.selected,.channel-selected,.drag-src,.drop-ok) {
+  background:var(--patchbay-fill); color:var(--patchbay-ink);
+  border-color:var(--patchbay-fill);
+  box-shadow:0 0 10px color-mix(in srgb,var(--patchbay-accent) 55%,transparent),0 3px 7px #0004;
+  outline:none; text-decoration:none;
+}
+:root[data-theme] #routing .port:is(.selected,:focus-visible),
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(.channel-selected,:focus-visible) {
+  text-decoration:none; font-weight:var(--fw-bold);
+}
+:root[data-theme] #routing .port:hover,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:hover { scale:1.05; }
+:root[data-theme] #routing .port:active,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:active { scale:.95; }
+:root[data-theme] #routing .port.drop-invalid,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port.drop-invalid {
+  outline:2px dashed var(--state-mute); outline-offset:4px; cursor:not-allowed;
+}
+:root[data-theme] #routing .port:disabled,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:disabled {
+  opacity:.45; scale:1; cursor:not-allowed; box-shadow:none;
+}
+:root[data-theme] #routing .route-wires path.core,
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-core {
+  transition:stroke var(--motion-settle) ease,opacity var(--motion-settle) ease;
+}
+:root[data-theme] #routing .route-wires path.core:is(.selected,.related),
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-route-core:is(.selected,.related) {
+  stroke:var(--patchbay-accent); opacity:1; stroke-width:2.5;
+}
+:root[data-theme] .graph-stage .graph-router-channel-row {
+  border-radius:7px; color:var(--router-ink);
+  transition:background-color var(--motion-material) var(--motion-material-easing),box-shadow var(--motion-material) var(--motion-material-easing);
+}
+:root[data-theme] .graph-stage .graph-router-channel-row.related {
+  background:color-mix(in srgb,var(--patchbay-accent) 10%,transparent);
+}
+:root[data-theme] .graph-stage .graph-router-channel-row.channel-selected {
+  background:color-mix(in srgb,var(--patchbay-accent) 16%,transparent);
+  box-shadow:none;
+}
+:root[data-theme] .graph-stage .graph-router-channel-row.input.channel-selected {
+  box-shadow:inset 3px 0 0 var(--patchbay-accent);
+}
+:root[data-theme] .graph-stage .graph-router-channel-row.channel-selected .graph-router-channel-label b { font-weight:var(--fw-bold); }
+@media (prefers-reduced-motion:reduce) {
+  :root[data-theme] #routing .port,
+  :root[data-theme] #routing .route-wires path.core,
+  :root[data-theme] .graph-stage .graph-router-matrix :is(.graph-router-matrix-port,.graph-router-route-core,.graph-router-channel-row) {
+    transition:none; animation:none; scale:1;
+  }
+  :root[data-theme] #routing .port:is(:hover,:active),
+  :root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:active) { scale:1; }
+}
+
+/* Dark Router matrix: jacks use the theme's cream control fill (matching the
+   channel labels' luminance), selection keeps the output red, and cables use
+   the older single blue-grey ink instead of the light-theme gradient. */
+:root[data-theme="dark"] .graph-stage .graph-router-matrix .graph-router-matrix-port {
+  background: var(--dark-control);
+  border-color: var(--dark-control);
+  color: var(--dark-bg);
+}
+:root[data-theme="dark"] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:focus-visible) {
+  background: color-mix(in srgb, var(--dark-control) 86%, #fff);
+  border-color: color-mix(in srgb, var(--dark-control) 86%, #fff);
+  color: var(--dark-bg);
+}
+:root[data-theme="dark"] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(.selected,.drag-src,.drop-ok) {
+  background: var(--dark-node-out);
+  border-color: var(--dark-node-out);
+  color: var(--dark-text);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--dark-node-out) 52%, transparent),
+              0 0 0 3.5px rgba(255, 248, 240, .5);
+}
+:root[data-theme="dark"] .graph-stage .graph-router-matrix .graph-router-route-core,
+:root[data-theme="dark"] .graph-stage .graph-router-matrix .graph-router-route-core.selected {
+  stroke: var(--dark-wire);
+}
+
+/* Router matrix jacks keep side identity: inputs blue, outputs red, in both
+   themes (dark idle fill stays the cream control color). */
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port[data-router-input]:is(:hover,:focus-visible,.selected,.drag-src,.drop-ok) {
+  background: var(--graph-node-input-header);
+  border-color: var(--graph-node-input-header);
+  color: #fff8f0;
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port[data-router-output]:is(:hover,:focus-visible,.selected,.drag-src,.drop-ok) {
+  background: var(--graph-node-output-header);
+  border-color: var(--graph-node-output-header);
+  color: #fff8f0;
+}
+
+/* Shared feedback for existing draggable numeric text (Align / Graph).
+   Parameter laws and geometry remain in each gesture owner. */
+:root[data-theme] .ir-editor input[data-ir-direct-value] {
+  --chlora-scrub-ink:var(--ir-ink);
+  --chlora-scrub-extra-transition:color 120ms ease;
+}
+:root[data-theme] .ir-distance-dialog input[data-ir-distance-depth] {
+  --chlora-scrub-ink:var(--ir-ink);
+  --chlora-scrub-extra-transition:color 120ms ease,opacity 120ms ease;
+}
+:root[data-theme] .graph-lfo-wire-hint .graph-lfo-range input {
+  --chlora-scrub-ink:var(--ink);
+  --chlora-scrub-extra-transition:color 180ms ease;
+}
+:root[data-theme] :is(#graphCanvas .graph-node.is-sum input[data-graph-sum-gain="1"],
+  #graphCanvas .graph-node.is-channel input[data-channel-field],
+  #graphCanvas .graph-lfo-panel input:is([data-lfo-field="phase"],[data-lfo-field="smoothMs"],[data-lfo-field="rateHz"]:not([role="button"])),
+  #graphCanvas .graph-ir-loader-controls input[data-ir-field],
+  .graph-lfo-wire-hint .graph-lfo-range input,
+  .ir-editor input[data-ir-direct-value],
+  .ir-distance-dialog input[data-ir-distance-depth]) {
+  --chlora-scrub-shadow:none;
+  background-color:transparent;
+  box-shadow:var(--chlora-scrub-shadow);
+  text-shadow:none; outline:none; border-radius:5px; text-align:center;
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing),
+    var(--chlora-scrub-extra-transition,color 180ms ease,opacity 180ms ease,scale 140ms ease);
+}
+:root[data-theme] :is(#graphCanvas .graph-node.is-sum input[data-graph-sum-gain="1"],
+  #graphCanvas .graph-node.is-channel input[data-channel-field],
+  #graphCanvas .graph-lfo-panel input:is([data-lfo-field="phase"],[data-lfo-field="smoothMs"],[data-lfo-field="rateHz"]:not([role="button"])),
+  #graphCanvas .graph-ir-loader-controls input[data-ir-field],
+  .graph-lfo-wire-hint .graph-lfo-range input,
+  .ir-editor input[data-ir-direct-value],
+  .ir-distance-dialog input[data-ir-distance-depth]):not(:disabled):hover {
+  --chlora-scrub-shadow:0 2px 7px color-mix(in srgb,var(--chlora-scrub-ink,var(--graph-node-ink,var(--ink))) 16%,transparent);
+  background-color:color-mix(in srgb,var(--chlora-scrub-ink,var(--graph-node-ink,var(--ink))) 7%,transparent);
+}
+:root[data-theme] :is(#graphCanvas .graph-node.is-sum input[data-graph-sum-gain="1"],
+  #graphCanvas .graph-node.is-channel input[data-channel-field],
+  #graphCanvas .graph-lfo-panel input:is([data-lfo-field="phase"],[data-lfo-field="smoothMs"],[data-lfo-field="rateHz"]:not([role="button"])),
+  #graphCanvas .graph-ir-loader-controls input[data-ir-field],
+  .graph-lfo-wire-hint .graph-lfo-range input,
+  .ir-editor input[data-ir-direct-value],
+  .ir-distance-dialog input[data-ir-distance-depth]):not(:disabled):focus-visible {
+  background-color:color-mix(in srgb,var(--chlora-scrub-ink,var(--graph-node-ink,var(--ink))) 12%,transparent);
+  border-radius:3px;
+}
+/* Distance keeps its transform/elevation guard for buttons and plot grips.
+   Only its existing scrub field participates in the shared numeric shadow. */
+:root[data-theme] .ir-distance-dialog input[data-ir-distance-depth] {
+  box-shadow:var(--chlora-scrub-shadow,none)!important;
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing),
+    var(--chlora-scrub-extra-transition,color 120ms ease,opacity 120ms ease)!important;
+}
+
+/* Pointer capture and inline entry are active Merge states even when the
+   native WebView does not classify pointer focus as keyboard focus-visible. */
+:root[data-theme] #graphCanvas .graph-node.is-sum input[data-graph-sum-gain="1"]:not(:disabled):is(:focus,:active,[data-sum-gain-editing="1"]) {
+  --chlora-scrub-shadow:0 2px 7px color-mix(in srgb,var(--graph-node-ink,var(--ink)) 16%,transparent);
+  background-color:color-mix(in srgb,var(--graph-node-ink,var(--ink)) 12%,transparent);
+  border-radius:3px;
+}
+/* Numeric Merge fields inherit the shared numeric material and lower shadow.
+   Branch-button hover and semantic colour are independent fades. The actual
+   S/M/polarity state and native command remain immediate. */
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button {
+  position:relative;
+  isolation:isolate;
+  box-shadow:none;
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing),
+    border-color var(--motion-theme-material) var(--motion-material-easing),
+    opacity 180ms ease,scale 140ms ease;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  border-radius:inherit;
+  pointer-events:none;
+  background-color:color-mix(in srgb,var(--graph-node-ink,var(--ink)) 7%,transparent);
+  opacity:0;
+  transition:opacity var(--motion-material) var(--motion-material-easing),
+    background-color var(--motion-theme-material) var(--motion-material-easing);
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button:not(:disabled):hover {
+  box-shadow:none;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button:not(:disabled,.on,[aria-pressed="true"]):hover {
+  background-color:transparent;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button:not(:disabled,.on,[aria-pressed="true"]):is(:hover,:focus-visible)::before {
+  opacity:1;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button:is(:disabled,.on,[aria-pressed="true"])::before {
+  /* A disappearing hover wash must not tint a newly enabled semantic fill. */
+  visibility:hidden;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-sum .graph-sum-branch-controls button:not(:disabled):focus-visible {
+  box-shadow:inset 0 0 0 2px color-mix(in srgb,currentColor 55%,transparent);
+}
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme] .ir-distance-dialog input[data-ir-distance-depth] { transition:none!important; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme] :is(#graphCanvas .graph-node.is-sum input[data-graph-sum-gain="1"],
+  #graphCanvas .graph-node.is-channel input[data-channel-field],
+  #graphCanvas .graph-lfo-panel input:is([data-lfo-field="phase"],[data-lfo-field="smoothMs"],[data-lfo-field="rateHz"]:not([role="button"])),
+  #graphCanvas .graph-ir-loader-controls input[data-ir-field],
+  .graph-lfo-wire-hint .graph-lfo-range input,
+  .ir-editor input[data-ir-direct-value],
+  .ir-distance-dialog input[data-ir-distance-depth]) { transition:none; }
+}
+
+/* Router channel emphasis fades like S/M; it never lifts or shrinks a jack. */
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port {
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    color var(--motion-material) var(--motion-material-easing),
+    border-color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing);
+}
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(:hover,:active) { scale:1; }
+:root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port:is(.channel-selected,:focus-visible) { font-weight:var(--fw-regular); }
+:root[data-theme] .graph-stage .graph-router-channel-row.channel-selected .graph-router-channel-label b { font-weight:var(--fw-regular); }
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-router .graph-router-mode-switch button,
+:root[data-theme] .graph-stage .graph-router-window-layer .graph-router-mode-switch button {
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing),opacity 160ms ease,scale 140ms ease;
+}
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-router .graph-router-mode-switch button:is(:hover,:focus-visible),
+:root[data-theme] .graph-stage .graph-router-window-layer .graph-router-mode-switch button:is(:hover,:focus-visible) {
+  background-color:color-mix(in srgb,currentColor 10%,transparent);
+  text-decoration:none; outline:none;
+}
+
+/* Mature S/M owners share Router's 180ms state colour fade, retaining their faces. */
+:root[data-theme] #mixerGrid button:is([data-solo],[data-mute]),
+:root[data-theme] #inputMeters button:is([data-in-solo],[data-in-mute]),
+:root[data-theme] .graph-stage #graphCanvas .graph-node.is-channel [data-sum-toggle],
+:root[data-theme] .graph-stage #graphCanvas .graph-node.fg-independent-source :is([data-fg-source-solo],[data-fg-source-mute]) {
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    color var(--motion-material) var(--motion-material-easing),
+    border-color var(--motion-material) var(--motion-material-easing),
+    box-shadow var(--motion-material) var(--motion-material-easing),opacity 180ms ease,scale 140ms ease;
+}
+:root[data-theme] .ir-editor .ir-editor-solo {
+  transition:background-color var(--motion-material) var(--motion-material-easing),
+    color var(--motion-material) var(--motion-material-easing),opacity 120ms ease,transform 120ms ease;
+}
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme] .graph-stage .graph-router-matrix .graph-router-matrix-port,
+  :root[data-theme] .graph-stage #graphCanvas .graph-node.is-router .graph-router-mode-switch button,
+  :root[data-theme] .graph-stage .graph-router-window-layer .graph-router-mode-switch button,
+  :root[data-theme] #mixerGrid button:is([data-solo],[data-mute]),
+  :root[data-theme] #inputMeters button:is([data-in-solo],[data-in-mute]),
+  :root[data-theme] .graph-stage #graphCanvas .graph-node.is-channel [data-sum-toggle],
+  :root[data-theme] .graph-stage #graphCanvas .graph-node.fg-independent-source :is([data-fg-source-solo],[data-fg-source-mute]),
+  :root[data-theme] .ir-editor .ir-editor-solo { transition:none; }
+}
+
+
+/* 2026-11-01: close glyphs share Reference geometry; hitboxes stay local. */
+:root[data-theme] .chlora-window-close { position:relative; }
+:root[data-theme] .chlora-close-space { visibility:hidden;pointer-events:none; }
+:root[data-theme] .chlora-window-close svg { position:absolute;left:50%;top:50%;transform:translate(-50%,-50%); }
+:root[data-theme] :is(.chlora-window-close,[data-close-reference]) svg {
+  display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;pointer-events:none;
+}
+
+/* The project/instance chooser keeps its loaded chrome even without a session.
+   .on/.live still describe real selection and connection; they are not forced. */
+:root[data-theme] .topbar #instanceToggle { box-shadow:inset 0 -2px 0 var(--wine); }
+
+/* One outlined return-to-start glyph; each owner retains its intrinsic hitbox. */
+:root[data-theme] .chlora-transport-home { position:relative; }
+:root[data-theme] .chlora-transport-home-space { visibility:hidden;pointer-events:none; }
+:root[data-theme] .chlora-transport-home-svg-space { display:block;width:14px;height:14px; }
+:root[data-theme] .chlora-transport-home-icon {
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:block;width:14px;height:14px;pointer-events:none;
+}
+
+/* Explicit ordinary commands share Browser's inset press. Existing state,
+   scalar, opacity and border owners retain their own contracts. */
+:root[data-theme] [data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play) {
+  --ui-action-ink:var(--repair-ink,var(--fgp-ink,var(--ir-ink,var(--graph-node-ink,var(--ink)))));
+  transition:background-color var(--motion-material) var(--motion-material-easing),box-shadow var(--motion-material) var(--motion-material-easing),var(--ui-action-extra-transition,color 180ms ease);
+}
+.ir-editor [data-ui-action="momentary"] { --ui-action-extra-transition:opacity 120ms ease,transform 120ms ease; }
+:is(.fgp-editor,.fgp-editor-exit,.fgp-compact) [data-ui-action="momentary"] { --ui-action-extra-transition:opacity var(--playback-fast) linear,transform 90ms var(--playback-ease); }
+:is(.fgp-source-editor,.fgp-source-editor-exit) [data-ui-action="momentary"] { --ui-action-extra-transition:border-color 120ms ease,opacity 120ms ease; }
+.fg-repair [data-ui-action="momentary"] { --ui-action-extra-transition:color var(--motion-material) var(--motion-material-easing),opacity var(--motion-settle,180ms) var(--motion-out,cubic-bezier(.16,1,.3,1)); }
+:root[data-theme] [data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play):not(:disabled,[aria-disabled="true"]):active,
+:root[data-theme] #graphStage :is(.graph-node,.graph-router-matrix) button[data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play):not(:disabled,[aria-disabled="true"]):active {
+  transform:none;translate:none;scale:1;
+  box-shadow:inset 0 2px 3px color-mix(in srgb,var(--ui-action-ink) 12%,transparent);
+}
+:root[data-theme] .ir-distance-dialog button[data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play):not(:disabled,[aria-disabled="true"]):active {
+  box-shadow:inset 0 2px 3px color-mix(in srgb,var(--ir-ink) 12%,transparent)!important;
+}
+:root[data-theme].theme-changing [data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play) { transition-duration:var(--motion-theme-material);transition-timing-function:var(--motion-material-easing); }
+@media(prefers-reduced-motion:reduce) {
+  :root[data-theme] [data-ui-action="momentary"]:not([aria-pressed],[aria-checked],[aria-selected],[aria-haspopup],[role="slider"],[role="spinbutton"],[role="radio"],[role="switch"],[role="checkbox"],[role="tab"],[data-loop-handle],.ir-wave-handle,.ir-clip-gain,.ir-preview-scale,.ir-editor-solo,.fgp-resize,.fgp-source-resize,.fg-repair-choice,.fgp-source-play,.fg-repair-play) { transition:none; }
+}

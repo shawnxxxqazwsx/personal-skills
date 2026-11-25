@@ -1,0 +1,4 @@
+interface:
+  display_name: "DAW Control"
+  short_description: "安全控制、排查与验证 REAPER、Nuendo/Cubase、Pro Tools、Logic Pro、Ableton Live 及多声道路由"
+  default_prompt: "使用 $daw-control 在当前 DAW 中完成我的任务；先识别宿主与工程状态，再以可验证、可回退的方式执行。"

@@ -1,0 +1,1306 @@
+{
+  "schema": "chlora-ir-bank-recipe/v1",
+  "label": "RT unknown · Unclassified · Custom Room · Array · Min",
+  "room": "Custom Room",
+  "profiles": {
+    "stereo": [
+      {
+        "slot": 1,
+        "physical_source_id": "S01",
+        "role": "L"
+      },
+      {
+        "slot": 2,
+        "physical_source_id": "S02",
+        "role": "R"
+      }
+    ],
+    "916": [
+      {
+        "slot": 1,
+        "physical_source_id": "S01",
+        "role": "L"
+      },
+      {
+        "slot": 2,
+        "physical_source_id": "S02",
+        "role": "R"
+      },
+      {
+        "slot": 3,
+        "physical_source_id": "S03",
+        "role": "C"
+      },
+      {
+        "slot": 5,
+        "physical_source_id": "S04",
+        "role": "LW"
+      },
+      {
+        "slot": 6,
+        "physical_source_id": "S05",
+        "role": "RW"
+      },
+      {
+        "slot": 7,
+        "physical_source_id": "S06",
+        "role": "LS"
+      },
+      {
+        "slot": 8,
+        "physical_source_id": "S07",
+        "role": "RS"
+      },
+      {
+        "slot": 9,
+        "physical_source_id": "S08",
+        "role": "LB"
+      },
+      {
+        "slot": 10,
+        "physical_source_id": "S09",
+        "role": "RB"
+      },
+      {
+        "slot": 11,
+        "physical_source_id": "S10",
+        "role": "FTL"
+      },
+      {
+        "slot": 12,
+        "physical_source_id": "S11",
+        "role": "FTR"
+      },
+      {
+        "slot": 13,
+        "physical_source_id": "S12",
+        "role": "MTL"
+      },
+      {
+        "slot": 14,
+        "physical_source_id": "S13",
+        "role": "MTR"
+      },
+      {
+        "slot": 15,
+        "physical_source_id": "S14",
+        "role": "RTL"
+      },
+      {
+        "slot": 16,
+        "physical_source_id": "S15",
+        "role": "RTR"
+      }
+    ]
+  },
+  "outputs": [
+    {
+      "slot": 1,
+      "receiver_id": "L",
+      "role": "L"
+    },
+    {
+      "slot": 2,
+      "receiver_id": "R",
+      "role": "R"
+    },
+    {
+      "slot": 3,
+      "receiver_id": "C",
+      "role": "C"
+    },
+    {
+      "slot": 5,
+      "receiver_id": "LW",
+      "role": "LW"
+    },
+    {
+      "slot": 6,
+      "receiver_id": "RW",
+      "role": "RW"
+    },
+    {
+      "slot": 7,
+      "receiver_id": "LS",
+      "role": "LS"
+    },
+    {
+      "slot": 8,
+      "receiver_id": "RS",
+      "role": "RS"
+    },
+    {
+      "slot": 9,
+      "receiver_id": "LB",
+      "role": "LB"
+    },
+    {
+      "slot": 10,
+      "receiver_id": "RB",
+      "role": "RB"
+    },
+    {
+      "slot": 11,
+      "receiver_id": "FTL",
+      "role": "FTL"
+    },
+    {
+      "slot": 12,
+      "receiver_id": "FTR",
+      "role": "FTR"
+    },
+    {
+      "slot": 13,
+      "receiver_id": "MTL",
+      "role": "MTL"
+    },
+    {
+      "slot": 14,
+      "receiver_id": "MTR",
+      "role": "MTR"
+    },
+    {
+      "slot": 15,
+      "receiver_id": "RTL",
+      "role": "RTL"
+    },
+    {
+      "slot": 16,
+      "receiver_id": "RTR",
+      "role": "RTR"
+    }
+  ],
+  "transfers": [
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "L",
+      "file": "raw/S01/L.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "R",
+      "file": "raw/S01/R.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "C",
+      "file": "raw/S01/C.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "LW",
+      "file": "raw/S01/LW.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "RW",
+      "file": "raw/S01/RW.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "LS",
+      "file": "raw/S01/LS.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "RS",
+      "file": "raw/S01/RS.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "LB",
+      "file": "raw/S01/LB.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "RB",
+      "file": "raw/S01/RB.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "FTL",
+      "file": "raw/S01/FTL.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "FTR",
+      "file": "raw/S01/FTR.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "MTL",
+      "file": "raw/S01/MTL.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "MTR",
+      "file": "raw/S01/MTR.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "RTL",
+      "file": "raw/S01/RTL.wav"
+    },
+    {
+      "physical_source_id": "S01",
+      "receiver_id": "RTR",
+      "file": "raw/S01/RTR.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "L",
+      "file": "raw/S02/L.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "R",
+      "file": "raw/S02/R.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "C",
+      "file": "raw/S02/C.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "LW",
+      "file": "raw/S02/LW.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "RW",
+      "file": "raw/S02/RW.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "LS",
+      "file": "raw/S02/LS.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "RS",
+      "file": "raw/S02/RS.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "LB",
+      "file": "raw/S02/LB.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "RB",
+      "file": "raw/S02/RB.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "FTL",
+      "file": "raw/S02/FTL.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "FTR",
+      "file": "raw/S02/FTR.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "MTL",
+      "file": "raw/S02/MTL.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "MTR",
+      "file": "raw/S02/MTR.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "RTL",
+      "file": "raw/S02/RTL.wav"
+    },
+    {
+      "physical_source_id": "S02",
+      "receiver_id": "RTR",
+      "file": "raw/S02/RTR.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "L",
+      "file": "raw/S03/L.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "R",
+      "file": "raw/S03/R.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "C",
+      "file": "raw/S03/C.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "LW",
+      "file": "raw/S03/LW.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "RW",
+      "file": "raw/S03/RW.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "LS",
+      "file": "raw/S03/LS.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "RS",
+      "file": "raw/S03/RS.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "LB",
+      "file": "raw/S03/LB.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "RB",
+      "file": "raw/S03/RB.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "FTL",
+      "file": "raw/S03/FTL.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "FTR",
+      "file": "raw/S03/FTR.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "MTL",
+      "file": "raw/S03/MTL.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "MTR",
+      "file": "raw/S03/MTR.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "RTL",
+      "file": "raw/S03/RTL.wav"
+    },
+    {
+      "physical_source_id": "S03",
+      "receiver_id": "RTR",
+      "file": "raw/S03/RTR.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "L",
+      "file": "raw/S04/L.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "R",
+      "file": "raw/S04/R.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "C",
+      "file": "raw/S04/C.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "LW",
+      "file": "raw/S04/LW.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "RW",
+      "file": "raw/S04/RW.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "LS",
+      "file": "raw/S04/LS.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "RS",
+      "file": "raw/S04/RS.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "LB",
+      "file": "raw/S04/LB.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "RB",
+      "file": "raw/S04/RB.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "FTL",
+      "file": "raw/S04/FTL.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "FTR",
+      "file": "raw/S04/FTR.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "MTL",
+      "file": "raw/S04/MTL.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "MTR",
+      "file": "raw/S04/MTR.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "RTL",
+      "file": "raw/S04/RTL.wav"
+    },
+    {
+      "physical_source_id": "S04",
+      "receiver_id": "RTR",
+      "file": "raw/S04/RTR.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "L",
+      "file": "raw/S05/L.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "R",
+      "file": "raw/S05/R.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "C",
+      "file": "raw/S05/C.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "LW",
+      "file": "raw/S05/LW.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "RW",
+      "file": "raw/S05/RW.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "LS",
+      "file": "raw/S05/LS.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "RS",
+      "file": "raw/S05/RS.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "LB",
+      "file": "raw/S05/LB.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "RB",
+      "file": "raw/S05/RB.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "FTL",
+      "file": "raw/S05/FTL.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "FTR",
+      "file": "raw/S05/FTR.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "MTL",
+      "file": "raw/S05/MTL.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "MTR",
+      "file": "raw/S05/MTR.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "RTL",
+      "file": "raw/S05/RTL.wav"
+    },
+    {
+      "physical_source_id": "S05",
+      "receiver_id": "RTR",
+      "file": "raw/S05/RTR.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "L",
+      "file": "raw/S06/L.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "R",
+      "file": "raw/S06/R.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "C",
+      "file": "raw/S06/C.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "LW",
+      "file": "raw/S06/LW.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "RW",
+      "file": "raw/S06/RW.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "LS",
+      "file": "raw/S06/LS.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "RS",
+      "file": "raw/S06/RS.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "LB",
+      "file": "raw/S06/LB.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "RB",
+      "file": "raw/S06/RB.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "FTL",
+      "file": "raw/S06/FTL.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "FTR",
+      "file": "raw/S06/FTR.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "MTL",
+      "file": "raw/S06/MTL.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "MTR",
+      "file": "raw/S06/MTR.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "RTL",
+      "file": "raw/S06/RTL.wav"
+    },
+    {
+      "physical_source_id": "S06",
+      "receiver_id": "RTR",
+      "file": "raw/S06/RTR.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "L",
+      "file": "raw/S07/L.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "R",
+      "file": "raw/S07/R.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "C",
+      "file": "raw/S07/C.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "LW",
+      "file": "raw/S07/LW.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "RW",
+      "file": "raw/S07/RW.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "LS",
+      "file": "raw/S07/LS.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "RS",
+      "file": "raw/S07/RS.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "LB",
+      "file": "raw/S07/LB.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "RB",
+      "file": "raw/S07/RB.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "FTL",
+      "file": "raw/S07/FTL.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "FTR",
+      "file": "raw/S07/FTR.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "MTL",
+      "file": "raw/S07/MTL.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "MTR",
+      "file": "raw/S07/MTR.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "RTL",
+      "file": "raw/S07/RTL.wav"
+    },
+    {
+      "physical_source_id": "S07",
+      "receiver_id": "RTR",
+      "file": "raw/S07/RTR.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "L",
+      "file": "raw/S08/L.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "R",
+      "file": "raw/S08/R.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "C",
+      "file": "raw/S08/C.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "LW",
+      "file": "raw/S08/LW.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "RW",
+      "file": "raw/S08/RW.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "LS",
+      "file": "raw/S08/LS.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "RS",
+      "file": "raw/S08/RS.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "LB",
+      "file": "raw/S08/LB.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "RB",
+      "file": "raw/S08/RB.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "FTL",
+      "file": "raw/S08/FTL.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "FTR",
+      "file": "raw/S08/FTR.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "MTL",
+      "file": "raw/S08/MTL.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "MTR",
+      "file": "raw/S08/MTR.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "RTL",
+      "file": "raw/S08/RTL.wav"
+    },
+    {
+      "physical_source_id": "S08",
+      "receiver_id": "RTR",
+      "file": "raw/S08/RTR.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "L",
+      "file": "raw/S09/L.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "R",
+      "file": "raw/S09/R.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "C",
+      "file": "raw/S09/C.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "LW",
+      "file": "raw/S09/LW.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "RW",
+      "file": "raw/S09/RW.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "LS",
+      "file": "raw/S09/LS.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "RS",
+      "file": "raw/S09/RS.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "LB",
+      "file": "raw/S09/LB.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "RB",
+      "file": "raw/S09/RB.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "FTL",
+      "file": "raw/S09/FTL.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "FTR",
+      "file": "raw/S09/FTR.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "MTL",
+      "file": "raw/S09/MTL.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "MTR",
+      "file": "raw/S09/MTR.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "RTL",
+      "file": "raw/S09/RTL.wav"
+    },
+    {
+      "physical_source_id": "S09",
+      "receiver_id": "RTR",
+      "file": "raw/S09/RTR.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "L",
+      "file": "raw/S10/L.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "R",
+      "file": "raw/S10/R.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "C",
+      "file": "raw/S10/C.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "LW",
+      "file": "raw/S10/LW.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "RW",
+      "file": "raw/S10/RW.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "LS",
+      "file": "raw/S10/LS.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "RS",
+      "file": "raw/S10/RS.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "LB",
+      "file": "raw/S10/LB.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "RB",
+      "file": "raw/S10/RB.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "FTL",
+      "file": "raw/S10/FTL.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "FTR",
+      "file": "raw/S10/FTR.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "MTL",
+      "file": "raw/S10/MTL.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "MTR",
+      "file": "raw/S10/MTR.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "RTL",
+      "file": "raw/S10/RTL.wav"
+    },
+    {
+      "physical_source_id": "S10",
+      "receiver_id": "RTR",
+      "file": "raw/S10/RTR.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "L",
+      "file": "raw/S11/L.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "R",
+      "file": "raw/S11/R.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "C",
+      "file": "raw/S11/C.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "LW",
+      "file": "raw/S11/LW.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "RW",
+      "file": "raw/S11/RW.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "LS",
+      "file": "raw/S11/LS.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "RS",
+      "file": "raw/S11/RS.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "LB",
+      "file": "raw/S11/LB.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "RB",
+      "file": "raw/S11/RB.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "FTL",
+      "file": "raw/S11/FTL.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "FTR",
+      "file": "raw/S11/FTR.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "MTL",
+      "file": "raw/S11/MTL.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "MTR",
+      "file": "raw/S11/MTR.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "RTL",
+      "file": "raw/S11/RTL.wav"
+    },
+    {
+      "physical_source_id": "S11",
+      "receiver_id": "RTR",
+      "file": "raw/S11/RTR.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "L",
+      "file": "raw/S12/L.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "R",
+      "file": "raw/S12/R.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "C",
+      "file": "raw/S12/C.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "LW",
+      "file": "raw/S12/LW.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "RW",
+      "file": "raw/S12/RW.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "LS",
+      "file": "raw/S12/LS.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "RS",
+      "file": "raw/S12/RS.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "LB",
+      "file": "raw/S12/LB.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "RB",
+      "file": "raw/S12/RB.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "FTL",
+      "file": "raw/S12/FTL.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "FTR",
+      "file": "raw/S12/FTR.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "MTL",
+      "file": "raw/S12/MTL.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "MTR",
+      "file": "raw/S12/MTR.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "RTL",
+      "file": "raw/S12/RTL.wav"
+    },
+    {
+      "physical_source_id": "S12",
+      "receiver_id": "RTR",
+      "file": "raw/S12/RTR.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "L",
+      "file": "raw/S13/L.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "R",
+      "file": "raw/S13/R.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "C",
+      "file": "raw/S13/C.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "LW",
+      "file": "raw/S13/LW.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "RW",
+      "file": "raw/S13/RW.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "LS",
+      "file": "raw/S13/LS.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "RS",
+      "file": "raw/S13/RS.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "LB",
+      "file": "raw/S13/LB.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "RB",
+      "file": "raw/S13/RB.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "FTL",
+      "file": "raw/S13/FTL.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "FTR",
+      "file": "raw/S13/FTR.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "MTL",
+      "file": "raw/S13/MTL.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "MTR",
+      "file": "raw/S13/MTR.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "RTL",
+      "file": "raw/S13/RTL.wav"
+    },
+    {
+      "physical_source_id": "S13",
+      "receiver_id": "RTR",
+      "file": "raw/S13/RTR.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "L",
+      "file": "raw/S14/L.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "R",
+      "file": "raw/S14/R.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "C",
+      "file": "raw/S14/C.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "LW",
+      "file": "raw/S14/LW.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "RW",
+      "file": "raw/S14/RW.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "LS",
+      "file": "raw/S14/LS.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "RS",
+      "file": "raw/S14/RS.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "LB",
+      "file": "raw/S14/LB.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "RB",
+      "file": "raw/S14/RB.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "FTL",
+      "file": "raw/S14/FTL.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "FTR",
+      "file": "raw/S14/FTR.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "MTL",
+      "file": "raw/S14/MTL.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "MTR",
+      "file": "raw/S14/MTR.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "RTL",
+      "file": "raw/S14/RTL.wav"
+    },
+    {
+      "physical_source_id": "S14",
+      "receiver_id": "RTR",
+      "file": "raw/S14/RTR.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "L",
+      "file": "raw/S15/L.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "R",
+      "file": "raw/S15/R.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "C",
+      "file": "raw/S15/C.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "LW",
+      "file": "raw/S15/LW.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "RW",
+      "file": "raw/S15/RW.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "LS",
+      "file": "raw/S15/LS.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "RS",
+      "file": "raw/S15/RS.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "LB",
+      "file": "raw/S15/LB.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "RB",
+      "file": "raw/S15/RB.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "FTL",
+      "file": "raw/S15/FTL.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "FTR",
+      "file": "raw/S15/FTR.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "MTL",
+      "file": "raw/S15/MTL.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "MTR",
+      "file": "raw/S15/MTR.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "RTL",
+      "file": "raw/S15/RTL.wav"
+    },
+    {
+      "physical_source_id": "S15",
+      "receiver_id": "RTR",
+      "file": "raw/S15/RTR.wav"
+    }
+  ],
+  "pad_to_common_frames": false,
+  "metadata": {
+    "measurement_kind": "REPLACE with measured, synthetic, interpolated or reused provenance",
+    "coordinate_convention": "unknown; supply source-backed axes and units",
+    "source_inventory": "REPLACE with an inventory reference; example IDs are not measurement evidence"
+  }
+}

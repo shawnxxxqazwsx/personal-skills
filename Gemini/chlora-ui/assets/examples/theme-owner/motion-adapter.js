@@ -1,0 +1,3 @@
+/* Exercise-only adapter. Never loaded by production. Exact query interception
+   supplies the lab Normal/Reduced selector without changing host-theme.js. */
+(function(){'use strict';let forced=false;const original=window.matchMedia.bind(window);window.matchMedia=function(query){if(query.replace(/\s/g,'')==='(prefers-reduced-motion:reduce)')return{media:query,get matches(){return forced;},addEventListener(){},removeEventListener(){},addListener(){},removeListener(){}};return original(query);};window.labSetMotion=function(value){forced=!!value;document.documentElement.classList.toggle('lab-reduced',forced);};})();

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Chlora UI"
+  short_description: "Chlora Strip 与 DraftRoom 的统一设计指南、动效与逐项案例"
+  default_prompt: "使用 $chlora-ui，为 Chlora 的新节点或功能沿用当前布局、控件、配色、图标与动效，并核查 WebView 禁止项。"
+policy:
+  allow_implicit_invocation: true
