@@ -18,7 +18,7 @@
 
 | Skill | 简介 |
 |---|---|
-| [`orchestrator`](Gemini/orchestrator/SKILL.md) | Antigravity 专属多代理编排与 Swarm 调度（Pure Dispatcher Primary、原生 Gemini 配额调度、UI 双模式协作与公开发布安全门控）。 |
+| [`orchestrator`](Gemini/orchestrator/SKILL.md) | Antigravity 专属效率优先多代理编排与 Swarm 调度（两档租约驱动并发 `Light 0–3` / `Standard 2–50`、平级 UI 零嵌套、R0/R1/R2 风险门禁与零全量复审、原生 Gemini 优先及公开发布安全红线）。 |
 | [`web-research`](Gemini/web-research/SKILL.md) | Antigravity 原生 Gemini 4 Hydrogen 多路并行联网调研与主代理交叉核验，所有 URL 与论文先抓取后引用。 |
 | [`memory`](Gemini/memory/SKILL.md) | 基于 `~/.mnemon-mcp/memory.db`（SQLite + FTS5）的跨模型、跨会话长期记忆读写（程序性偏好、项目里程碑与稳定架构事实）。 |
 | [`session-handoff`](Gemini/session-handoff/SKILL.md) | 单任务或跨窗口切换时的临时工作态交接摘要与新会话续跑上下文生成。 |
