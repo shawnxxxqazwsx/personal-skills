@@ -8,14 +8,38 @@ review and push security.
 
 ## Lease-Driven Scaling, Pipelining & Hard Boundaries
 
+- **Hard Mid-Session Escalation Thresholds:** Light `N = 0` is strictly capped at
+  `<= 4` edited files AND `<= 5` **Primary self-read** business-source files
+  (`Light N = 1–3` single-module helpers reading files do not trigger Standard
+  escalation). Mid-session, the moment **Primary self-reads** exceed `> 5`
+  business-source files, pending edits exceed `> 4` files, or `>= 2` independent
+  hypotheses/modules emerge, **stop immediately and escalate**: if the whole task
+  has only **1 non-splittable cohesive write lease**, dispatch an `N = 1` writer
+  Swarm (Anti-Padding overrides the `N >= 2` Standard floor); otherwise escalate
+  to Standard Swarm (`2 <= N <= 50`). Small visual UI tweaks (`<= 4` files) may
+  skip a full coding swarm (dispatching `1–3` single-module helpers such as
+  `@ui-carbon` as needed), and any visible visual/typography/sizing/token change
+  still requires `@ui-carbon` visual sign-off (pure logic/perf bugfixes exempt).
 - **Anti-Padding Rule (no `N >= 5` floor):** in Standard Tier (`2 <= N <= 50`/wave,
-  unlimited cumulative), set `N` to actual independent slices/leases. Never split
-  one cohesive write lease just to inflate `N`; scale to `5–50` (via `tasks: [...]`)
-  only when independent shards exist.
-- **Vertical slices + warm reuse:** writers own implementation + paired unit/focused
-  tests + L1–L2 checks inside their lease (no separate reader, test-author, or
-  verifier waterfall waves). Reuse `waiting` workers via `post_message(text: "@<name> ...")`
-  over kill/respawn churn.
+  unlimited cumulative), set `N` to actual independent slices/leases (or `N = 1`
+  when only one cohesive write lease exists after leaving `Light N = 0`). Never
+  split one cohesive write lease just to inflate `N`; scale to `5–50` (via
+  `tasks: [...]`) only when independent shards exist.
+- **Vertical slices, warm reuse cap & atomic retirement:** writers own
+  implementation + paired unit/focused tests + L1–L2 checks inside their lease
+  (no separate reader, test-author, or verifier waterfall waves). Never casually
+  `kill` healthy `waiting` workers between waves (zero idle cost); reuse via
+  `post_message(text: "@<name> ...")`. Workers may tag `[compacted]` in summaries.
+  **Retirement cap:** once a worker hits `>= 3` context compactions (`CHECKPOINT`),
+  spans `>= 4` major waves, or repeatedly re-reads the same files post-compaction,
+  retire it via an **atomic two-step loop**: (1) outgoing worker lands diffs (if
+  `workspace: "share"`) and posts a `<= 20`-line structured handover (`#seq`) to
+  **`@coordinator`**; (2) on wakeup, Primary runs `swarm(action: "kill", old)` +
+  `swarm(action: "add", new, brief: "...citing #seq...")` in the **same turn**.
+- **Long-session anti-drift:** Primary's Pure Dispatcher boundary (`<= 3` focused
+  reads; `<= 3` files / `<= 30` lines hub closure) holds across **all waves without
+  decay**. When a worker stalls, diagnose, wake, or hand over to a fresh worker—never
+  pull Primary into writing business code.
 - **Per-Slice Pipelining:** advance each finished independent slice straight to
   validation, review, or integration without waiting for slower slices.
 - **Zero-Nesting hard boundary:** ZERO workers (including Carbon) may spawn
@@ -64,9 +88,15 @@ Combine templates for hybrid work under the cross-skill allowlist
    **same wave**: `Neon` (`low|medium|high`) owns all UI coding, GUI perf & tests;
    `Hydrogen` (`medium`) is strictly read-only inventory, added **only** when
    `>= 5` UI files or unfamiliar design systems (never edits UI production code).
-   Pure GUI logic/perf/layout bugfixes with no visual/token changes dispatch
-   directly to `Neon` without Carbon gate. Review: Carbon visual sign-off (plus
-   parallel `Neon medium` code review on complex visual + logic/perf UI).
+   **Zero UI serial ping-pong:** when `@ui-carbon` and `Neon` dispatch in the same
+   wave, `Neon` starts immediately in parallel on skeleton/DOM inventory, test
+   stubs, or non-visual wiring against a lightweight structural freeze—never sit
+   idle waiting for Carbon's visual spec. Small visual UI tweaks (`<= 4` files)
+   may skip a full coding swarm but still require `@ui-carbon` visual sign-off
+   for any visible visual/typography/sizing/token change; pure GUI logic/perf/layout
+   bugfixes with no visual/token changes dispatch directly to `Neon` without a
+   Carbon gate. Review: Carbon visual sign-off (plus parallel `Neon medium` code
+   review on complex visual + logic/perf UI).
 7. **Workspace Cleanup & Public GitHub Push**:
    merge cleanup + doc/link/index updates into disjoint writers (`Hydrogen medium` /
    `Neon medium`), followed by automated secret/size/tree scan (`> 20 MB` warn,
@@ -81,9 +111,21 @@ bounded deliverable + observable acceptance/falsifier; (2) exclusive writable
 paths + frozen shared interfaces (`@all [freeze]` when shared); (3) non-colliding
 build/execution lane + peer `@name` handoff targets.
 
+- **Single Reusable Build Lane (1 holder at a time):** each task strictly reuses
+  a single dedicated `build-lane-<product>-<suffix>` directory across waves
+  (never create a fresh `cmake -S` build directory per round) with **at most 1
+  holder at any moment**. When `>= 2` compiling writers run in the same wave,
+  freeze code and pass the build token serially via `@<peer>` to run compiled
+  L1–L2 (or use `workspace: "share"` if concurrent edits touch a shared target
+  graph); report `blocked` only for external/unresolvable lock contention (use a
+  single delayed `schedule` retry or `blocked-technical`). If new module/test
+  registrations wait for Primary's end-of-wave Hub closure (`<= 3` files /
+  `<= 30` lines) without pre-staged stubs, writers pass in-lease syntax/standalone
+  L1 (and runnable L2) and flag pending Hub items in `[done]`; Primary runs
+  link-stage L1–L2 immediately after Hub closure.
 - **Default `workspace: "inherit"`:** keep readers and disjoint writers on
-  `workspace: "inherit"` with exclusive path leases (+ dedicated repo build
-  lanes). Use `workspace: "share"` **only** when paths overlap or build trees
+  `workspace: "inherit"` with exclusive path leases (+ the task's reused build
+  lane). Use `workspace: "share"` **only** when paths overlap or build trees
   collide without dedicated lanes; always land diffs before `kill`.
 - **Read/write concurrency & hub serialization:** readers safely share an
   immutable revision or frozen interface; writes conflict with any read/write

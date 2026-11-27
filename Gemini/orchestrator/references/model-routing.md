@@ -76,20 +76,41 @@ in the current request:
    leases (+ dedicated build lanes when compiling/testing). Use
    `workspace: "share"` only when paths overlap or build trees collide without
    dedicated lanes (land diffs before `swarm(action: "kill", ...)`).
-5. **Warm reuse & escalation:** reuse `waiting` `swarm` workers via
-   `post_message(text: "@<name> <续跑指令>")` (zero idle tokens, full context
-   retained—e.g. winning debug investigator -> fix writer) and `invoke_subagent`
-   via `send_message(Recipient: "<conversationId>", Message: "...")`. Workers
-   stop immediately on unfrozen interfaces, lease conflicts, external edits, or
-   permission/hook denials.
+5. **Warm reuse cap vs. no inter-wave premature kills:** never casually `kill`
+   healthy `waiting` `swarm` workers between waves (zero idle tokens, full
+   context retained—e.g. winning debug investigator -> fix writer); reuse via
+   `post_message(text: "@<name> <续跑指令>")` and `invoke_subagent` via
+   `send_message(Recipient: "<conversationId>", Message: "...")`. Workers may
+   self-report `[compacted]` in summaries. **Atomic two-step retirement:** once
+   a worker accumulates `>= 3` context compactions (`CHECKPOINT`), spans `>= 4`
+   major waves, or repeatedly re-reads the same files post-compaction: (1) the
+   outgoing worker lands diffs (if `share`) and posts a `<= 20`-line structured
+   handover (`#seq`) to **`@coordinator`**; (2) on wakeup, Primary runs
+   `swarm(action: "kill", old)` + `swarm(action: "add", new, brief: "...citing #seq...")`
+   in the **same turn** (preventing dual-writer overlap or missed wakeups).
+   Workers stop immediately on unfrozen interfaces, lease conflicts, external
+   edits, or permission/hook denials.
+6. **No-polling anti-pattern & long async watchdog:** Primary and all workers
+   are strictly forbidden from loop-polling `manage_task(status)` /
+   `swarm(action: "status")` / `read_board` / `tail -n`; rely exclusively on
+   reactive async wakeups (`swarm_wait`, task notifications), reserving
+   `swarm(action: "status")` for anomaly troubleshooting or final receipt checks
+   (for external non-swarm lock `blocked`, use a single delayed `schedule` retry
+   or `blocked-technical`). For any external/cloud job expected to exceed
+   `> 10 min` (Colab, long builds, external CI), Primary must confirm an active
+   `schedule` watchdog before entering `swarm_wait` and attach any replacement
+   timer **before** cancelling the old one.
 
 ## Route Receipts
 
-Verify native Antigravity execution before slice/wave integration:
+Verify native Antigravity execution before slice/wave integration (without
+polling loops):
 
-- **`swarm`:** verify `swarm(action: "status")` / `read_board` `[done]` posts
-  (read-only workers require only `[done]` verdicts); for writers, also check
-  real disk diffs (`git status --short`, `git diff --stat`) and raw command
-  exit codes/summaries.
+- **`swarm`:** verify `read_board` `[done]` posts (use `swarm(action: "status")`
+  only for final receipt or anomaly troubleshooting; read-only workers require
+  only `[done]` verdicts); for writers, also check real disk diffs
+  (`git status --short`, `git diff --stat`) and raw L1–L2 exit codes/summaries.
 - **`invoke_subagent`:** verify returned `conversationId` completion message
   (plus disk diffs and raw outputs for write tasks).
+- **Long async jobs (`> 10 min`):** verify a `schedule` watchdog was active
+  across `swarm_wait` windows and handoffs replaced timers before cancellation.

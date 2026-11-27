@@ -17,11 +17,23 @@ Validate in strict order, stopping the affected slice at the first failing layer
 5. **L5:** Exercise the integrated, hosted, deployed, or live path when claimed.
 
 Chaining L1–L4 in a single shell command (`&&`) is encouraged to cut round-trips.
-Once L1–L2 pass and the diff freezes, L3–L4 may run in parallel with R1/R2 review.
-A lower-level pass (unit test, mock, or screenshot) never proves an untested
-hosted/live path—report exact untested layers instead of claiming closure. Record
-tested revision, built artifact, deployed path, and runtime config; after an
-in-place update, confirm the running process or host loaded the new binary.
+**Mandatory writer L1–L2 before `[done]`:** every implementation writer must pass
+L1 (compile/syntax/type check) + L2 (repro/acceptance signal) inside its lease
+before posting `[done]`. When `>= 2` compiling writers share the task's single
+reused build lane, freeze code and hand off the build token serially via
+`@<peer>` (or use `workspace: "share"` if concurrent edits touch a shared target
+graph); report `blocked` only for external/unresolvable lock or env blockers
+(retry via a single delayed `schedule` or escalate `blocked-technical`—never
+poll or post `[done]`). When new module/test registrations depend on Primary's
+end-of-wave Hub closure (`<= 3` files / `<= 30` lines) without pre-staged stubs,
+writers pass in-lease syntax/standalone-unit L1 (and runnable L2) and flag
+pending Hub items in `[done]`; Primary runs link-stage L1–L2 immediately after
+Hub closure. Once L1–L2 pass and the diff freezes, L3–L4 may run in parallel with
+R1/R2 review. A lower-level pass (unit test, mock, or screenshot) never proves an
+untested hosted/live path—report exact untested layers instead of claiming
+closure. Record tested revision, built artifact, deployed path, and runtime
+config; after an in-place update, confirm the running process or host loaded the
+new binary.
 
 ## Risk-Driven Review Gate (`R0 / R1 / R2`)
 
@@ -43,6 +55,7 @@ Reviewers inspect actual files, diffs, and raw command output on disk, citing
 - **`[P1]` (blocking):** reproducible defect or hard contract violation with `path:line` + repro.
 - **`[P2]` (strictly non-blocking):** max 3 bullets; never triggers rework or re-review.
 - **`[P3]` (nitpicks):** suppressed by default.
+- **Multi-round iterative incremental review gate:** during sustained multi-round iterations (e.g., `R1–R10`), whenever a major architectural/algorithmic change lands or at least every `<= 3` substantive code-change rounds, run a lightweight incremental review before cloud upload or deployment (`Neon medium` for routine code; `R2` preserved for DSP/high-risk domains).
 - **Delta-only re-check (cap = 1):** after fixing `[P0]`/`[P1]`, **never** re-run full review or wake other reviewers. Warm-reuse only the original finding's reviewer in place via `post_message` (never call `swarm(action: "model")` just to downgrade; R1/Carbon are already `medium`, and spawn `Neon medium` only if the original reviewer is unavailable) to inspect incremental `git diff` + new test/scan output, **capped at 1 round**; if still unresolved, escalate to `@coordinator`.
 - **Deterministic closure shortcut:** if a `[P1]` is directly proved closed by a new deterministic test or automated scan, skip LLM re-review.
 - **Public push redline cleanup:** run an automated full-tree/history rescan + 1 targeted delta sign-off on the cleaned paths/commits.
@@ -65,8 +78,8 @@ and git history** if sensitive data was ever committed:
 A worker's `[done]` post is a claim, not acceptance. Primary runs lightweight
 mechanical receipt acceptance before integration:
 
-- **Single mutable-resource owner:** serialize writes to shared build trees, running hosts/devices, live services, or external accounts; prefer scratch copies/fixtures for mutating checks.
-- **Mechanical disk checks:** verify `git status --short`, `git diff --stat`, raw validation exit codes/summaries, and reviewer `[done]` verdicts directly on disk.
-- **UI & lane boundaries:** verify zero Hydrogen edits to UI production code, design-token adherence on Neon GUI diffs, and Carbon's visual sign-off on visual UI changes (flat peer Swarm workers; see [complexity.md](complexity.md)).
-- **Native route receipts:** confirm native `conversationId` or `swarm` `[done]` posts per [model-routing.md](model-routing.md#route-receipts).
+- **Single build lane & mutable-resource owner:** enforce one reused `build-lane-<product>-<suffix>` per task across waves (**1 holder at a time**, serial `@<peer>` token handoff for same-wave compiling writers, no fresh `cmake -S` directory per round) and serialize writes to shared build trees, running hosts/devices, live services, or external accounts; prefer scratch copies/fixtures for mutating checks.
+- **Mechanical disk & L1–L2 checks:** verify `git status --short`, `git diff --stat`, raw L1–L2 validation exit codes/summaries (reject `[done]` claims missing L1–L2; run link-stage L1–L2 immediately after deferred Hub closure; external lock/env blockers must report `blocked` with single delayed `schedule` retry or `blocked-technical`), and reviewer `[done]` verdicts directly on disk.
+- **UI & lane boundaries:** verify zero Hydrogen edits to UI production code, design-token adherence on Neon GUI diffs, and Carbon's visual sign-off on visual UI changes (including `<= 4`-file visible visual tweaks; see [complexity.md](complexity.md)).
+- **Native route, no-polling & watchdog receipts:** confirm native `conversationId` or `swarm` `[done]` posts without polling loops (`swarm(action: "status")` only for anomaly troubleshooting or final receipt), and for any `> 10 min` external/cloud job confirm an active `schedule` watchdog covered `swarm_wait` (replacement timer attached before cancelling old) per [model-routing.md](model-routing.md#route-receipts).
 - **Final gate:** accept only after layered validation, the applicable `R0`/`R1`/`R2` gate, and (for public pushes) the hard redline audit pass per [../SKILL.md](../SKILL.md).

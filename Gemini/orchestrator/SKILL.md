@@ -45,30 +45,58 @@ full-stack/scripts, UI updates, workspace cleanup & GitHub publishing).
 
 ## Rule 1.5: Dynamic Two-Tier Scaling (`Light 0–3` / `Standard 2–50`)
 
-- **Light Tier (`0 <= N <= 3`/wave):** single-module or `<= 4` tightly coupled files local tweaks
-  (`N = 0` Primary direct or `1–3` native helpers via light `swarm` or single `invoke_subagent`).
+- **Light Tier (`0 <= N <= 3`/wave):** single-module or `<= 4` tightly coupled files (`N = 0`
+  Primary direct **only** when modifying `<= 4` files AND Primary self-reads `<= 5` business
+  source files; within that single-module scope, dispatch `1–3` native helpers—e.g.
+  `@ui-carbon`—as needed via light `swarm` or single `invoke_subagent`). **Hard mid-session
+  escalation:** once Primary in Light `N = 0` exceeds `> 5` business source self-reads (helper
+  reads within the single module do not trigger escalation), `> 4` files to modify, or `>= 2`
+  independent hypotheses/modules, stop immediately and escalate to Swarm (if only 1 cohesive
+  write lease exists, dispatch an `N = 1` writer Swarm—anti-padding overrides the `N >= 2`
+  floor). Small visual UI tweaks (`<= 4` files) may skip a coding swarm, but any visible
+  visual/font/size/token change still requires `@ui-carbon` sign-off (pure logic/perf bugfixes
+  exempt).
 - **Standard Tier (`2 <= N <= 50`/wave, unlimited cumulative):** lease-driven concurrency (`N` =
-  actual independent slices/leases; **no `N >= 5` padding floor**; scales to `5–50` when real
-  shards exist). **Anti-padding:** never split one cohesive write lease just to inflate `N`.
-  Escalate Light -> Standard for `>= 2` independent modules, whole-repo/multi-category audits,
-  multi-hypothesis debug, multi-panel UI updates, substantive Skill refactors, or workspace
-  cleanup + public GitHub push.
-- **Pragmatic Pure Dispatcher (Standard Tier):** Primary never bulk-reads large files, writes
-  bulk business code/long docs, or runs multi-file sweeps. Allowed on Primary: (a) brief framing
-  reads (`<= 3` small header/rule/target files), (b) `web-research` final URL fetch verification
-  & synthesis, (c) tiny hub/glue closure edits (`<= 3` files, `<= 30` lines total), (d)
-  lightweight receipt acceptance (`git status --short`, `git diff --stat`, raw test summary,
-  reviewer `[done]` verdicts, Carbon UI sign-off), (e) single-step Q&A, live desktop/DAW ops, or
-  Rule 1 fallback.
-- **Efficiency defaults:** writers own vertical slices (implementation + paired tests + L1–L2
-  checks inside their lease; debug warm-reuses the winning investigator via
-  `post_message(text: "@<name> ...")`). Use **per-slice pipelining** (finished slices advance
-  immediately to validation/review/integration without waiting for stragglers) and direct
-  `@<peer>` + `#seq` handoffs (escalate frozen contract/lease changes to `@coordinator`). Default
-  `workspace: "inherit"` + disjoint path leases (`workspace: "share"` only when paths overlap or
-  build trees collide without dedicated build lanes; land diffs before `kill`). No static `2–4:1`
-  verifier pre-allocation; progress monitor **OFF by default** (attach only if `>= 15` workers
-  AND expected multi-stage runtime `> 15 min`).
+  actual independent slices/leases; **no `N >= 5` padding floor**; `N = 1` writer Swarm allowed
+  when escalated with only 1 cohesive write lease; scales to `5–50` when real shards exist).
+  **Anti-padding:** never split one cohesive write lease just to inflate `N`. Escalate Light ->
+  Standard for `>= 2` independent modules, whole-repo/multi-category audits, multi-hypothesis
+  debug, multi-panel UI updates, substantive Skill refactors, or workspace cleanup + public
+  GitHub push.
+- **Pragmatic Pure Dispatcher (Standard Tier, no drift across waves):** Primary never bulk-reads
+  large files, writes bulk business code/long docs, or runs multi-file sweeps. Allowed on Primary:
+  (a) brief framing reads (`<= 3` small header/rule/target files), (b) `web-research` final URL
+  fetch verification & synthesis, (c) tiny hub/glue closure edits (`<= 3` files, `<= 30` lines
+  total), (d) lightweight receipt acceptance (`git status --short`, `git diff --stat`, raw test
+  summary, reviewer `[done]` verdicts, Carbon UI sign-off), (e) single-step Q&A, live desktop/DAW
+  ops, or Rule 1 fallback. This boundary holds across **all waves without decay**: if a worker
+  stalls or drifts, diagnose/wake/hand off and replace it—never step in to write business code on
+  Primary.
+- **Efficiency defaults:** writers own vertical slices (implementation + paired tests) and **MUST
+  pass L1 (compile/syntax/type) + L2 (reproducer/acceptance signal) inside their lease before
+  reporting `[done]`**; if new module/test registration awaits Primary's end-of-wave Hub closure
+  (`<= 3` files/`<= 30` lines) without pre-stubbing, pass lease-local syntax/unit L1 (and
+  runnable L2), note the pending Hub wiring in `[done]`, and Primary runs link-level L1–L2
+  immediately after Hub closure. Reuse **one** `build-lane-<product>-<suffix>` per task across
+  waves (never create a new `cmake -S` directory per wave) with **at most 1 holder at a time**:
+  when `>= 2` compiling writers share a wave, chain the build-lane token via `@<peer>` after code
+  freeze to run compile-time L1–L2 sequentially (use `workspace: "share"` if concurrent edits
+  touch a shared target graph); report `blocked`—never `[done]`—only on external/unresolvable
+  lock or env contention (retry via one-shot delayed `schedule` or escalate to
+  `blocked-technical`). Debug warm-reuses the winning investigator via
+  `post_message(text: "@<name> ...")`. **Warm-reuse cap & atomic 2-step retirement:** never
+  `kill` healthy `waiting` workers between waves (zero idle cost); workers may tag `[compacted]`
+  in receipts to surface compaction. Retire and replace a worker after `>= 3` context compactions
+  (`CHECKPOINT`), `>= 4` major waves, or repeated re-reads of the same files post-compaction: (1)
+  wake the retiring worker to land changes (if `share`) and post a `<= 20`-line structured
+  handoff to `@coordinator` (obtaining `#seq`); (2) on wakeup, Primary executes
+  `swarm(action: "kill", old)` + `swarm(action: "add", new, brief: "...citing #seq...")` in the
+  **same turn**. Use **per-slice pipelining** (finished slices advance immediately without
+  waiting for stragglers) and direct `@<peer>` + `#seq` handoffs (escalate frozen contract/lease
+  changes to `@coordinator`). Default `workspace: "inherit"` + disjoint path leases
+  (`workspace: "share"` only when paths overlap or build trees collide without dedicated build
+  lanes; land diffs before `kill`). No static `2–4:1` verifier pre-allocation; progress monitor
+  **OFF by default** (attach only if `>= 15` workers AND expected multi-stage runtime `> 15 min`).
 - **Pure `web-research` direct handoff:** delegate directly to `web-research/SKILL.md` (`>= 3`
   Hydrogen `swarm` + `tasks: [...]`, default `gemini-4-hydrogen-medium`, deep `high|xhigh`; reuse
   active or new board; never `invoke_subagent`; Primary directly fetch-verifies cited URLs &
@@ -93,10 +121,13 @@ full-stack/scripts, UI updates, workspace cleanup & GitHub publishing).
 - **Retire Mode A (no 1-hop helpers):** unify on **Flat Swarm Peers**. Primary spawns
   `@ui-carbon` (`gemini-4-carbon-medium|high`) alongside `1 <= N_ui <= 10` UI peers in the
   **same wave**.
-- **Role split:** `@ui-carbon` owns visual direction, tokens, and aesthetic sign-off, and may
-  directly read `<= 3` focused target files/tokens/diffs (no bulk repo reads or bulk engineering
-  code). **Neon** owns all UI coding & GUI perf; **Hydrogen** is strictly read-only inventory,
-  added only when `>= 5` UI files or an unfamiliar design system is involved.
+- **Role split & no serial ping-pong:** `@ui-carbon` owns visual direction, tokens, and aesthetic
+  sign-off, and may directly read `<= 3` focused target files/tokens/diffs (no bulk repo reads or
+  bulk engineering code). **Neon** owns all UI coding & GUI perf; when launched in the same wave
+  as `@ui-carbon`, Neon **immediately** works in parallel on scaffolding, DOM/component inventory,
+  test stubs, or non-visual wiring under a lightweight structural freeze—never idling for the full
+  visual spec. **Hydrogen** is strictly read-only inventory, added only when `>= 5` UI files or an
+  unfamiliar design system is involved.
 - **Fast path & zero nesting:** pure GUI logic/perf/layout bugfixes with **no visual/token
   changes** dispatch directly to Neon without a Carbon gate. **ZERO workers (including Carbon)**
   may spawn subagents.
@@ -108,9 +139,9 @@ falsifier). For shared contracts/leases, post one `@all [freeze]` on the board a
 
 ```text
 目标与验收：一句话任务/单点问题 + 确定性验收信号/证伪条件（参考 `#seq` 冻结契约，如适用）
-车道与约束：<model-id>｜严禁派生任何子代理｜同伴直连 `@<peer>`（变更冻结契约/租约报 `@coordinator`）
+车道与约束：<model-id>｜严禁派生任何子代理｜禁轮询，依异步唤醒｜同伴直连 `@<peer>`（变更冻结契约/租约报 `@coordinator`）
 租约与边界：可写 `<paths>`（或只读）｜禁碰 `<scope>`（禁 Hydrogen 写 UI 生产代码；公开推送守安全红线）
-回报与停止：遇权限/Hook/未冻结接口立即停止并回报阻塞；完成回复 `@coordinator [done] <紧凑摘要>`
+回报与停止：遇权限/Hook/共享锁/未冻结接口立即停止报 `blocked`；写者完成前须跑通 L1–L2 后回复 `@coordinator [done] <紧凑摘要>`
 ```
 
 ## Risk-Driven Review (`R0 / R1 / R2`) & Zero Full Re-Review
@@ -138,7 +169,11 @@ Decoupled from Light/Standard scale; triggered strictly by risk & determinism:
   if the original reviewer is unavailable) to check incremental `git diff` + new test/scan output,
   capped at 1 round (unresolved -> `@coordinator`). Skip LLM re-review if a `[P1]` is directly
   proved closed by a deterministic test/scan. `[P0]`/`[P1]` block merge; `[P2]` is non-blocking
-  (max 3 bullets, no rework); suppress `[P3]` nitpicks by default. Full gate & L1–L5 validation in
+  (max 3 bullets, no rework); suppress `[P3]` nitpicks by default.
+- **Iterative delta review (long sessions):** across sustained multi-round iterations (e.g.
+  R1–R10), run a lightweight incremental review before cloud/deploy whenever a major
+  architecture/algorithm change lands or at least every `<= 3` substantive code rounds (routine:
+  `Neon medium`; DSP/high-risk keeps R2). Full gate & L1–L5 validation in
   [references/verification.md](references/verification.md).
 
 ## Public GitHub Push Redline (Permanent, Both Tiers)
@@ -154,11 +189,19 @@ sign-off. Full checklist in [references/verification.md](references/verification
 ## Lifecycle, Ownership & Communication
 
 - **Concurrency & safety:** one exclusive owner per mutable path, build lane, or live controller;
-  never interrupt healthy commands (inspect contention at 5 min no progress or 2× baseline);
-  never use stop hooks. Workers stop immediately on permission/hook blocks, unfrozen interfaces,
-  or out-of-lease scope. States: `active` | `paused-user` | `blocked-technical` |
+  reuse one `build-lane-<product>-<suffix>` per task across waves with at most 1 holder at a time
+  (chain token via `@<peer>` across same-wave compiling writers); never interrupt healthy commands
+  (inspect contention at 5 min no progress or 2× baseline); never use stop hooks. Workers stop
+  immediately and report `blocked` on permission/hook blocks, external/unresolvable lock
+  contention (retry via one-shot delayed `schedule` or escalate to `blocked-technical`), unfrozen
+  interfaces, or out-of-lease scope. States: `active` | `paused-user` | `blocked-technical` |
   `escalation-needed` (after compaction/continuation, re-check user input, active handles, and
   live artifacts first).
+- **No polling & long-job watchdog:** Primary and all workers NEVER loop-poll
+  `manage_task(status)`, `swarm(action: "status")`, `read_board`, or `tail -n`—rely on async
+  wakeups (`swarm(status)` is for fault triage or final receipt only). For `> 10 min`
+  external/cloud jobs (Colab/long builds/CI), Primary MUST confirm an active `schedule` watchdog
+  before entering `swarm_wait`, and always attach the new timer before cancelling the old one.
 - **Communication (Simplified Chinese):** keep routine reads/greps silent; send 1–2 sentence
   milestones on confirmed root cause, wave dispatch/returns, build/test completion, or blockers.
   Final reports state accepted artifacts, verified layers, receipts, deploy/publish state, and
